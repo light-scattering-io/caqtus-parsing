@@ -72,9 +72,10 @@ def build_variable(node: Node) -> Variable:
     names = []
 
     # We skip the dots in the children list by jumping by 2
-    for child in node.children[0::2]:
-        assert child.text
-        names.append(child.text.decode("utf-8"))
+    for child in node.children:
+        if child.type != ".":
+            assert child.text
+            names.append(child.text.decode("utf-8"))
 
     return Variable(tuple(names))
 
@@ -97,11 +98,13 @@ def build_quantity(node: Node) -> Quantity:
     ]
 
     for multiplicative_node in unit_node.children_by_field_name("multiplicative"):
-        multiplicative_units.append(build_unit_term(multiplicative_node))
+        if multiplicative_node.type != "*":
+            multiplicative_units.append(build_unit_term(multiplicative_node))
 
     divisional_units = [
         build_unit_term(divisional_node)
         for divisional_node in unit_node.children_by_field_name("divisive")
+        if divisional_node.type != "/"
     ]
 
     return Quantity(magnitude, tuple(multiplicative_units), tuple(divisional_units))
@@ -120,7 +123,7 @@ def build_unit_term(node: Node) -> tuple[Unit, Optional[int]]:
     if exponent_node is None:
         return Unit(base), None
     else:
-        assert exponent_node.type == "integer"
+        assert exponent_node.type == "integer", exponent_node.type
         assert exponent_node.text
         exponent = int(exponent_node.text.decode("utf-8"))
 

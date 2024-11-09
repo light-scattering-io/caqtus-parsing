@@ -81,7 +81,7 @@ module.exports = grammar({
 
     unit_term: $ => seq(
       field("unit", $.unit),
-      field("exponent", optional(seq(choice('^', '**'), $.integer))),
+      optional(seq(choice('^', '**'), field("exponent", $.integer))),
     ),
 
     // Percents and degrees are allowed to be used as units.

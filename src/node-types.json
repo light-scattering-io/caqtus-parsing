@@ -134,17 +134,9 @@
     "named": true,
     "fields": {
       "exponent": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "**",
-            "named": false
-          },
-          {
-            "type": "^",
-            "named": false
-          },
           {
             "type": "integer",
             "named": true

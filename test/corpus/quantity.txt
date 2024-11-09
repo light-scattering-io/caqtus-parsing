@@ -96,3 +96,22 @@ Percent
     (units
       (unit_term
         (unit)))))
+
+===========================
+Spaced multiplicative units
+===========================
+
+1.0 m s^-1
+
+---
+
+(expression
+  (quantity
+    (float)
+    (units
+      (unit_term
+        (unit))
+      (unit_term
+        (unit)
+        (integer)))))
+

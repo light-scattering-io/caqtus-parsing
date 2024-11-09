@@ -75,7 +75,7 @@ module.exports = grammar({
 
     units: $ => seq(
       field("first", $.unit_term),
-      field("multiplicative", repeat(seq('*', $.unit_term))),
+      field("multiplicative", repeat(seq(optional('*'), $.unit_term))),
       field("divisive", repeat(seq('/', $.unit_term))),
     ),
 

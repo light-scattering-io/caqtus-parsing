@@ -1,5 +1,56 @@
 [
   {
+    "type": "args",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "call",
+    "named": true,
+    "fields": {
+      "args": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "args",
+            "named": true
+          }
+        ]
+      },
+      "function": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "NAME",
+            "named": true
+          }
+        ]
+      },
+      "kwargs": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "kwargs",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "expression",
     "named": true,
     "root": true,
@@ -8,6 +59,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "call",
+          "named": true
+        },
         {
           "type": "float",
           "named": true
@@ -36,6 +91,40 @@
     "type": "integer",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "kwarg",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "NAME",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "kwargs",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kwarg",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "quantity",
@@ -147,6 +236,14 @@
     }
   },
   {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
     "type": "*",
     "named": false
   },
@@ -155,11 +252,19 @@
     "named": false
   },
   {
+    "type": ",",
+    "named": false
+  },
+  {
     "type": ".",
     "named": false
   },
   {
     "type": "/",
+    "named": false
+  },
+  {
+    "type": "=",
     "named": false
   },
   {

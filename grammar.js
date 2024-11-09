@@ -7,12 +7,20 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
+const PREC = {
+  float: 1,
+  integer: 2,
+  call: 3,
+};
+
+
 module.exports = grammar({
   name: "caqtus",
   rules: {
     expression: $ => choice(
       $.variable,
       $._scalar,
+      $.call,
     ),
 
     variable: $ => seq(
@@ -32,7 +40,7 @@ module.exports = grammar({
       $.float,
     ),
 
-    integer: $ => prec(2, seq(
+    integer: $ => prec(PREC.integer, seq(
       optional($._SIGN),
       $._DIGITS,
     )),
@@ -40,7 +48,7 @@ module.exports = grammar({
     float: $ => {
       const exponent = seq(/[eE][+-]?/, $._DIGITS);
 
-      return prec(1, seq(
+      return prec(PREC.float, seq(
           optional($._SIGN),
           choice(
             seq($._DIGITS, '.', optional($._DIGITS), optional(exponent)),
@@ -74,5 +82,29 @@ module.exports = grammar({
     // Percents and degrees are allowed to be used as units.
     // Doesn't allow °C.
     _SINGLE_UNIT: _ => token(choice(/[a-zA-Z]+/, '°', '%')),
+
+    call: $ => prec(PREC.call, seq(
+      field('function', $.NAME),
+      '(',
+      field('args', optional($.args)),
+      field('kwargs', optional($.kwargs)),
+      ')',
+    )),
+
+    args: $ => seq(
+      $.expression,
+      repeat(seq(',', $.expression)),
+    ),
+
+    kwargs: $ => seq(
+      $.kwarg,
+      repeat(seq(',', $.kwarg)),
+    ),
+
+    kwarg: $ => seq(
+      $.NAME,
+      '=',
+      $.expression,
+    ),
   }
 });

@@ -17,7 +17,7 @@
 
 enum ts_symbol_identifiers {
   anon_sym_DOT = 1,
-  sym_name = 2,
+  sym_NAME = 2,
   aux_sym_float_token1 = 3,
   sym__DIGITS = 4,
   sym__SIGN = 5,
@@ -43,7 +43,7 @@ enum ts_symbol_identifiers {
 static const char * const ts_symbol_names[] = {
   [ts_builtin_sym_end] = "end",
   [anon_sym_DOT] = ".",
-  [sym_name] = "name",
+  [sym_NAME] = "NAME",
   [aux_sym_float_token1] = "float_token1",
   [sym__DIGITS] = "_DIGITS",
   [sym__SIGN] = "_SIGN",
@@ -69,7 +69,7 @@ static const char * const ts_symbol_names[] = {
 static const TSSymbol ts_symbol_map[] = {
   [ts_builtin_sym_end] = ts_builtin_sym_end,
   [anon_sym_DOT] = anon_sym_DOT,
-  [sym_name] = sym_name,
+  [sym_NAME] = sym_NAME,
   [aux_sym_float_token1] = aux_sym_float_token1,
   [sym__DIGITS] = sym__DIGITS,
   [sym__SIGN] = sym__SIGN,
@@ -101,7 +101,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = false,
   },
-  [sym_name] = {
+  [sym_NAME] = {
     .visible = true,
     .named = true,
   },
@@ -356,7 +356,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(anon_sym_DOT);
       END_STATE();
     case 6:
-      ACCEPT_TOKEN(sym_name);
+      ACCEPT_TOKEN(sym_NAME);
       if (lookahead == '+' ||
           lookahead == '-') ADVANCE(9);
       if (('0' <= lookahead && lookahead <= '9') ||
@@ -365,14 +365,14 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           ('a' <= lookahead && lookahead <= 'z')) ADVANCE(7);
       END_STATE();
     case 7:
-      ACCEPT_TOKEN(sym_name);
+      ACCEPT_TOKEN(sym_NAME);
       if (('0' <= lookahead && lookahead <= '9') ||
           lookahead == '_') ADVANCE(8);
       if (('A' <= lookahead && lookahead <= 'Z') ||
           ('a' <= lookahead && lookahead <= 'z')) ADVANCE(7);
       END_STATE();
     case 8:
-      ACCEPT_TOKEN(sym_name);
+      ACCEPT_TOKEN(sym_NAME);
       if (('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
           lookahead == '_' ||
@@ -478,7 +478,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   [0] = {
     [ts_builtin_sym_end] = ACTIONS(1),
     [anon_sym_DOT] = ACTIONS(1),
-    [sym_name] = ACTIONS(1),
+    [sym_NAME] = ACTIONS(1),
     [aux_sym_float_token1] = ACTIONS(1),
     [sym__DIGITS] = ACTIONS(1),
     [sym__SIGN] = ACTIONS(1),
@@ -497,7 +497,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym_float] = STATE(7),
     [sym_quantity] = STATE(38),
     [anon_sym_DOT] = ACTIONS(3),
-    [sym_name] = ACTIONS(5),
+    [sym_NAME] = ACTIONS(5),
     [sym__DIGITS] = ACTIONS(7),
     [sym__SIGN] = ACTIONS(9),
   },
@@ -740,7 +740,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym__DIGITS,
   [323] = 1,
     ACTIONS(114), 1,
-      sym_name,
+      sym_NAME,
   [327] = 1,
     ACTIONS(116), 1,
       ts_builtin_sym_end,

@@ -16,11 +16,11 @@ module.exports = grammar({
     ),
 
     variable: $ => seq(
-      $.name,
-      repeat(seq('.', $.name)),
+      $.NAME,
+      repeat(seq('.', $.NAME)),
     ),
 
-    name: _ => /[a-zA-Z][a-zA-Z0-9_]*/,
+    NAME: _ => token(/[a-zA-Z][a-zA-Z0-9_]*/),
 
     _scalar: $ => choice(
       $._number,

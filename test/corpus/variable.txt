@@ -8,7 +8,7 @@ variable_name
 
 (expression
     (variable
-        (name)))
+        (NAME)))
 
 ===========
 Dotted name
@@ -20,8 +20,8 @@ variable.attribute_name
 
 (expression
     (variable
-        (name)
-        (name)))
+        (NAME)
+        (NAME)))
 
 ===================
 Invalid dotted name
@@ -33,9 +33,9 @@ variable..name
 
     (expression
       (variable
-        (name)
+        (NAME)
         (ERROR)
-        (name)))
+        (NAME)))
 
 ============
 Missing name
@@ -47,8 +47,8 @@ variable.name.
 
 (expression
       (variable
-        (name)
-        (name)
-        (MISSING name)))
+        (NAME)
+        (NAME)
+        (MISSING NAME)))
 
 

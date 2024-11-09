@@ -140,7 +140,7 @@
       "required": true,
       "types": [
         {
-          "type": "name",
+          "type": "NAME",
           "named": true
         }
       ]
@@ -163,11 +163,11 @@
     "named": false
   },
   {
-    "type": "^",
-    "named": false
+    "type": "NAME",
+    "named": true
   },
   {
-    "type": "name",
-    "named": true
+    "type": "^",
+    "named": false
   }
 ]

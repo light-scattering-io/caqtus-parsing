@@ -20,7 +20,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "name"
+          "name": "NAME"
         },
         {
           "type": "REPEAT",
@@ -33,16 +33,19 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "name"
+                "name": "NAME"
               }
             ]
           }
         }
       ]
     },
-    "name": {
-      "type": "PATTERN",
-      "value": "[a-zA-Z][a-zA-Z0-9_]*"
+    "NAME": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[a-zA-Z][a-zA-Z0-9_]*"
+      }
     },
     "_scalar": {
       "type": "CHOICE",

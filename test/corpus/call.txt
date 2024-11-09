@@ -1,0 +1,85 @@
+============
+No arguments
+============
+
+f()
+
+---
+
+(expression
+  (call
+    (NAME)))
+
+===============
+Single argument
+===============
+
+f(x)
+
+---
+
+(expression
+  (call
+    (NAME)
+    (args
+      (expression
+        (variable
+          (NAME))))))
+
+==================
+Multiple arguments
+==================
+
+f(x, y, z)
+
+---
+
+(expression
+  (call
+    (NAME)
+    (args
+      (expression
+        (variable
+          (NAME)))
+      (expression
+        (variable
+          (NAME)))
+      (expression
+        (variable
+          (NAME))))))
+
+
+================
+Call on quantity
+================
+
+f(12.5 MHz)
+
+---
+
+(expression
+  (call
+    (NAME)
+    (args
+      (expression
+        (quantity
+          (float)
+          (unit
+            (unit_term)))))))
+
+=======================
+Call on variable dotted
+=======================
+
+f(x.y)
+
+---
+
+(expression
+  (call
+    (NAME)
+    (args
+      (expression
+        (variable
+          (NAME)
+          (NAME))))))

@@ -14,11 +14,14 @@ module.exports = grammar({
       $.variable,
       $._scalar,
     ),
+
     variable: $ => seq(
       $.name,
       repeat(seq('.', $.name)),
     ),
+
     name: _ => /[a-zA-Z][a-zA-Z0-9_]*/,
+
     _scalar: $ => choice(
       $._number,
       $.quantity,
@@ -28,7 +31,6 @@ module.exports = grammar({
       $.integer,
       $.float,
     ),
-
 
     integer: $ => prec(2, seq(
       optional($._SIGN),

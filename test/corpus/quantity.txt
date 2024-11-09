@@ -22,7 +22,7 @@ Multiplicative unit
 
     (expression
       (quantity
-        (integer)
+        (float)
         (unit
           (unit_term)
           (unit_term)
@@ -38,7 +38,7 @@ Multiplicative and divisive unit
 
     (expression
       (quantity
-        (integer)
+        (float)
         (unit
           (unit_term)
           (unit_term)
@@ -69,7 +69,7 @@ Degree
 
     (expression
       (quantity
-        (integer)
+        (float)
         (unit
           (unit_term))))
 

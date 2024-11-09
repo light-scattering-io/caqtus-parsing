@@ -7,9 +7,6 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-const DIGITS = repeat1(/[0-9]+_?/);
-const SIGN = /[-+]/;
-
 module.exports = grammar({
   name: "caqtus",
   rules: {
@@ -33,26 +30,31 @@ module.exports = grammar({
     ),
 
 
-    integer: $ => seq(
-      optional(SIGN),
-      DIGITS,
-    ),
+    integer: $ => prec(2, seq(
+      optional($._SIGN),
+      $._DIGITS,
+    )),
 
     float: $ => {
-      const exponent = seq(/[eE][+-]?/, DIGITS);
+      const exponent = seq(/[eE][+-]?/, $._DIGITS);
 
-      return seq(
-        optional(SIGN),
-        choice(
-          seq(DIGITS, '.', optional(DIGITS), optional(exponent)),
-          seq(optional(DIGITS), '.', DIGITS, optional(exponent)),
-          seq(DIGITS, exponent),
-        ),
+      return prec(1, seq(
+          optional($._SIGN),
+          choice(
+            seq($._DIGITS, '.', optional($._DIGITS), optional(exponent)),
+            seq(optional($._DIGITS), '.', $._DIGITS, optional(exponent)),
+            seq($._DIGITS, optional(exponent)),
+          ),
+        )
       );
-
     },
+
+    _DIGITS: _ => token(repeat1(/[0-9]+_?/)),
+
+    _SIGN: _ => token(/[-+]/),
+
     quantity: $ => seq(
-      field("magnitude", $._number),
+      field("magnitude", $.float),
       field("unit", $.unit),
     ),
 
@@ -63,10 +65,12 @@ module.exports = grammar({
     ),
 
     unit_term: $ => seq(
-      // Percents and degrees are allowed to be used as units.
-      // Doesn't allow °C.
-      field("base", choice(/[a-zA-Z]+/, '°', '%')),
+      field("base", $._SINGLE_UNIT),
       field("exponent", optional(seq(choice('^', '**'), $.integer))),
     ),
+
+    // Percents and degrees are allowed to be used as units.
+    // Doesn't allow °C.
+    _SINGLE_UNIT: _ => token(choice(/[a-zA-Z]+/, '°', '%')),
   }
 });

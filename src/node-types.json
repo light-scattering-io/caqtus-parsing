@@ -48,10 +48,6 @@
           {
             "type": "float",
             "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
           }
         ]
       },
@@ -115,20 +111,6 @@
     "type": "unit_term",
     "named": true,
     "fields": {
-      "base": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "%",
-            "named": false
-          },
-          {
-            "type": "°",
-            "named": false
-          }
-        ]
-      },
       "exponent": {
         "multiple": true,
         "required": false,
@@ -165,10 +147,6 @@
     }
   },
   {
-    "type": "%",
-    "named": false
-  },
-  {
     "type": "*",
     "named": false
   },
@@ -191,9 +169,5 @@
   {
     "type": "name",
     "named": true
-  },
-  {
-    "type": "°",
-    "named": false
   }
 ]

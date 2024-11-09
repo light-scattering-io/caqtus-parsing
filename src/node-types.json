@@ -9,7 +9,15 @@
       "required": true,
       "types": [
         {
-          "type": "scalar",
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "quantity",
           "named": true
         },
         {
@@ -20,37 +28,101 @@
     }
   },
   {
-    "type": "number",
+    "type": "quantity",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "float",
-          "named": true
-        },
-        {
-          "type": "integer",
-          "named": true
-        }
-      ]
+    "fields": {
+      "magnitude": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      },
+      "unit": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "unit",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
-    "type": "scalar",
+    "type": "unit",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "number",
-          "named": true
-        }
-      ]
+    "fields": {
+      "base": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "unit_term",
+            "named": true
+          }
+        ]
+      },
+      "divisive": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "unit_term",
+            "named": true
+          }
+        ]
+      },
+      "multiplicative": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "*",
+            "named": false
+          },
+          {
+            "type": "unit_term",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "unit_term",
+    "named": true,
+    "fields": {
+      "exponent": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "**",
+            "named": false
+          },
+          {
+            "type": "^",
+            "named": false
+          },
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -69,7 +141,23 @@
     }
   },
   {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": "**",
+    "named": false
+  },
+  {
     "type": ".",
+    "named": false
+  },
+  {
+    "type": "/",
+    "named": false
+  },
+  {
+    "type": "^",
     "named": false
   },
   {

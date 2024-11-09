@@ -7,9 +7,7 @@ unsigned integer
 ---
 
     (expression
-      (scalar
-        (number
-          (integer))))
+      (integer))
 
 
 ================
@@ -21,9 +19,7 @@ negative integer
 ---
 
     (expression
-      (scalar
-        (number
-          (integer))))
+      (integer))
 
 
 ================
@@ -35,9 +31,7 @@ positive integer
 ---
 
     (expression
-      (scalar
-        (number
-          (integer))))
+      (integer))
 
 ================
 floating point
@@ -48,9 +42,7 @@ floating point
 ---
 
     (expression
-      (scalar
-        (number
-          (float))))
+      (float))
 
 ================
 negative floating point
@@ -61,9 +53,7 @@ negative floating point
 ---
 
     (expression
-      (scalar
-        (number
-          (float))))
+      (float))
 
 ===================
 scientific notation
@@ -74,9 +64,7 @@ scientific notation
 ---
 
     (expression
-      (scalar
-        (number
-          (float))))
+      (float))
 
 =======================================
 scientific notation - negative exponent
@@ -87,9 +75,7 @@ scientific notation - negative exponent
 ---
 
     (expression
-      (scalar
-        (number
-          (float))))
+      (float))
 
 ===================================
 scientific notation - negative sign
@@ -100,9 +86,4 @@ scientific notation - negative sign
 ---
 
     (expression
-      (scalar
-        (number
-          (float))))
-
-
-
+      (float))

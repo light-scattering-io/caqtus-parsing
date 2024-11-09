@@ -12,20 +12,39 @@ module.exports = grammar({
   rules: {
     expression: $ => choice(
       $.variable,
-      $.scalar,
+      $._scalar,
     ),
     variable: $ => seq(
       $.name,
       repeat(seq('.', $.name)),
     ),
     name: _ => /[a-zA-Z][a-zA-Z0-9_]*/,
-    scalar: $ => choice(
-      $.number,
+    _scalar: $ => choice(
+      $._number,
+      $.quantity,
     ),
-    number: $ => choice(
+
+    _number: $ => choice(
       $.integer,
       $.float,
     ),
+
+    quantity: $ => seq(
+      field("magnitude", $._number),
+      field("unit", $.unit),
+    ),
+
+    unit: $ => seq(
+      field("base", $.unit_term),
+      field("multiplicative", repeat(seq('*', $.unit_term))),
+      field("divisive", repeat(seq('/', $.unit_term))),
+    ),
+
+    unit_term: $ => seq(
+      field("base", /[a-zA-Z]+/),
+      field("exponent", optional(seq(choice('^', '**'), $.integer))),
+    ),
+
 
     integer: _ => token(seq(
       optional(/[-+]/),

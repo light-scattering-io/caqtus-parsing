@@ -42,3 +42,4 @@ dist/
 /package-lock.json
 /parser.exp
 /parser.lib
+/bindings/python/tree_sitter_caqtus/_binding.pyd

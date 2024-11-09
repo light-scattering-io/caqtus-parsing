@@ -1,11 +1,6 @@
-from unittest import TestCase
+import tree_sitter
+import tree_sitter_caqtus
 
-import tree_sitter, tree_sitter_caqtus
 
-
-class TestLanguage(TestCase):
-    def test_can_load_grammar(self):
-        try:
-            tree_sitter.Language(tree_sitter_caqtus.language())
-        except Exception:
-            self.fail("Error loading Caqtus grammar")
+def test_can_load_grammar():
+    tree_sitter.Language(tree_sitter_caqtus.language())

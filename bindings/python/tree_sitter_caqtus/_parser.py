@@ -17,6 +17,7 @@ def parse(code: str) -> Expression:
 
     if root_node.has_error:
         error_node = find_first_error(root_node)
+        assert error_node is not None
         raise InvalidSyntaxError(
             f"Invalid syntax encountered while parsing expression <{code}>",
             (
@@ -32,16 +33,14 @@ def parse(code: str) -> Expression:
     return build_expression(tree.root_node)
 
 
-def find_first_error(node: Node) -> Node:
-    if node.is_error:
+def find_first_error(node: Node) -> Node | None:
+    if node.is_error or node.is_missing:
         return node
 
     for child in node.children:
         error = find_first_error(child)
         if error:
             return error
-
-    raise AssertionError("No error node found")
 
 
 def build_expression(node: Node) -> Expression:

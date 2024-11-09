@@ -443,22 +443,6 @@
             }
           },
           {
-            "type": "FIELD",
-            "name": "kwargs",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "kwargs"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            }
-          },
-          {
             "type": "STRING",
             "value": ")"
           }
@@ -487,48 +471,6 @@
               }
             ]
           }
-        }
-      ]
-    },
-    "kwargs": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "kwarg"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": ","
-              },
-              {
-                "type": "SYMBOL",
-                "name": "kwarg"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "kwarg": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "NAME"
-        },
-        {
-          "type": "STRING",
-          "value": "="
-        },
-        {
-          "type": "SYMBOL",
-          "name": "expression"
         }
       ]
     }

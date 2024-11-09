@@ -87,24 +87,12 @@ module.exports = grammar({
       field('function', $.NAME),
       '(',
       field('args', optional($.args)),
-      field('kwargs', optional($.kwargs)),
       ')',
     )),
 
     args: $ => seq(
       $.expression,
       repeat(seq(',', $.expression)),
-    ),
-
-    kwargs: $ => seq(
-      $.kwarg,
-      repeat(seq(',', $.kwarg)),
-    ),
-
-    kwarg: $ => seq(
-      $.NAME,
-      '=',
-      $.expression,
     ),
   }
 });

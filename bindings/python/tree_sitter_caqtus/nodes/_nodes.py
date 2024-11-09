@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, NewType
 
 import attrs
 
@@ -21,6 +21,7 @@ class Variable:
 
     names: tuple[str, ...]
 
+Unit = NewType("Unit", str)
 
 @attrs.frozen
 class Quantity:
@@ -35,5 +36,5 @@ class Quantity:
     """
 
     magnitude: float
-    multiplicative_units: tuple[tuple[str, Optional[int]], ...]
-    divisional_units: tuple[tuple[str, Optional[int]], ...]
+    multiplicative_units: tuple[tuple[Unit, Optional[int]], ...]
+    divisional_units: tuple[tuple[Unit, Optional[int]], ...]

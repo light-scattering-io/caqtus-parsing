@@ -3,7 +3,7 @@ from typing import Optional
 from tree_sitter import Language, Parser, Node
 
 from ._binding import language  # noqa: F401
-from .nodes import Variable, Expression, Quantity
+from .nodes import Variable, Expression, Quantity, Unit
 
 CAQTUS_LANGUAGE = Language(language())
 
@@ -88,9 +88,9 @@ def build_quantity(node: Node) -> Quantity:
     assert magnitude_node.text
     magnitude = float(magnitude_node.text.decode("utf-8"))
 
-    unit_node = node.child_by_field_name("unit")
+    unit_node = node.child_by_field_name("units")
     assert unit_node is not None
-    assert unit_node.type == "unit"
+    assert unit_node.type == "units"
 
     multiplicative_units = [
         build_unit_term(get_child_by_field_name(unit_node, "first"))
@@ -107,24 +107,24 @@ def build_quantity(node: Node) -> Quantity:
     return Quantity(magnitude, tuple(multiplicative_units), tuple(divisional_units))
 
 
-def build_unit_term(node: Node) -> tuple[str, Optional[int]]:
+def build_unit_term(node: Node) -> tuple[Unit, Optional[int]]:
     assert node.type == "unit_term"
 
-    base_node = node.child_by_field_name("base")
+    base_node = node.child_by_field_name("unit")
     assert base_node is not None
-    assert base_node.type == "identifier"
+    assert base_node.type == "unit"
     assert base_node.text
     base = base_node.text.decode("utf-8")
 
     exponent_node = node.child_by_field_name("exponent")
     if exponent_node is None:
-        return base, None
+        return Unit(base), None
     else:
         assert exponent_node.type == "integer"
         assert exponent_node.text
         exponent = int(exponent_node.text.decode("utf-8"))
 
-        return base, exponent
+        return Unit(base), exponent
 
 
 def get_child_by_field_name(node: Node, field_name: str) -> Node:

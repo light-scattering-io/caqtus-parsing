@@ -32,8 +32,8 @@
             "type": "SEQ",
             "members": [
               {
-                "type": "STRING",
-                "value": "."
+                "type": "SYMBOL",
+                "name": "_DOT"
               },
               {
                 "type": "SYMBOL",
@@ -43,6 +43,13 @@
           }
         }
       ]
+    },
+    "_DOT": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\."
+      }
     },
     "NAME": {
       "type": "TOKEN",

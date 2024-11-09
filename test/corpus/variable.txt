@@ -46,9 +46,22 @@ variable.name.
 ---
 
 (expression
-      (variable
-        (NAME)
-        (NAME)
-        (MISSING NAME)))
+  (variable
+    (NAME))
+  (ERROR
+    (NAME)))
+
+============
+Invalid name
+============
+
+.name
+
+---
+
+(expression
+  (ERROR)
+  (variable
+    (NAME)))
 
 

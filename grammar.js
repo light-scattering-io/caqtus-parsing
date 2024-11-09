@@ -25,8 +25,10 @@ module.exports = grammar({
 
     variable: $ => seq(
       $.NAME,
-      repeat(seq('.', $.NAME)),
+      repeat(seq($._DOT, $.NAME)),
     ),
+
+    _DOT: _ => token('.'),
 
     NAME: _ => token(/[a-zA-Z][a-zA-Z0-9_]*/),
 

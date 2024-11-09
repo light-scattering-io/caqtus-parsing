@@ -47,9 +47,9 @@ variable.name.
 
 (expression
   (variable
-    (NAME))
-  (ERROR
-    (NAME)))
+    (NAME)
+    (NAME)
+    (MISSING NAME)))
 
 ============
 Invalid name

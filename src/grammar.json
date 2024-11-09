@@ -47,8 +47,8 @@
     "_DOT": {
       "type": "TOKEN",
       "content": {
-        "type": "PATTERN",
-        "value": "\\."
+        "type": "STRING",
+        "value": "."
       }
     },
     "NAME": {
@@ -300,7 +300,7 @@
       "members": [
         {
           "type": "FIELD",
-          "name": "base",
+          "name": "first",
           "content": {
             "type": "SYMBOL",
             "name": "unit_term"

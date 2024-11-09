@@ -1,7 +1,9 @@
+from typing import Optional
+
 from tree_sitter import Language, Parser, Node
 
 from ._binding import language  # noqa: F401
-from .nodes import Variable, Expression
+from .nodes import Variable, Expression, Quantity
 
 CAQTUS_LANGUAGE = Language(language())
 
@@ -57,7 +59,7 @@ def build_expression(node: Node) -> Expression:
         case Node(type="float"):
             return float(child.text.decode("utf-8"))
         case Node(type="quantity"):
-            raise NotImplementedError("Quantity parsing is not implemented yet")
+            return build_quantity(node.children[0])
         case Node(type="call"):
             raise NotImplementedError("Call parsing is not implemented yet")
         case _:
@@ -69,11 +71,66 @@ def build_variable(node: Node) -> Variable:
 
     names = []
 
-    for child in node.children:
+    # We skip the dots in the children list by jumping by 2
+    for child in node.children[0::2]:
         assert child.text
         names.append(child.text.decode("utf-8"))
 
     return Variable(tuple(names))
+
+
+def build_quantity(node: Node) -> Quantity:
+    assert node.type == "quantity"
+
+    magnitude_node = node.child_by_field_name("magnitude")
+    assert magnitude_node is not None
+    assert magnitude_node.type == "float"
+    assert magnitude_node.text
+    magnitude = float(magnitude_node.text.decode("utf-8"))
+
+    unit_node = node.child_by_field_name("unit")
+    assert unit_node is not None
+    assert unit_node.type == "unit"
+
+    multiplicative_units = [
+        build_unit_term(get_child_by_field_name(unit_node, "first"))
+    ]
+
+    for multiplicative_node in unit_node.children_by_field_name("multiplicative"):
+        multiplicative_units.append(build_unit_term(multiplicative_node))
+
+    divisional_units = [
+        build_unit_term(divisional_node)
+        for divisional_node in unit_node.children_by_field_name("divisive")
+    ]
+
+    return Quantity(magnitude, tuple(multiplicative_units), tuple(divisional_units))
+
+
+def build_unit_term(node: Node) -> tuple[str, Optional[int]]:
+    assert node.type == "unit_term"
+
+    base_node = node.child_by_field_name("base")
+    assert base_node is not None
+    assert base_node.type == "identifier"
+    assert base_node.text
+    base = base_node.text.decode("utf-8")
+
+    exponent_node = node.child_by_field_name("exponent")
+    if exponent_node is None:
+        return base, None
+    else:
+        assert exponent_node.type == "integer"
+        assert exponent_node.text
+        exponent = int(exponent_node.text.decode("utf-8"))
+
+        return base, exponent
+
+
+def get_child_by_field_name(node: Node, field_name: str) -> Node:
+    result = node.child_by_field_name(field_name)
+    assert result is not None
+    return result
 
 
 class ParsingError(Exception):

@@ -1,3 +1,3 @@
-from ._nodes import Variable, Expression
+from ._nodes import Variable, Expression, Quantity
 
-__all__ = ["Variable", "Expression"]
+__all__ = ["Variable", "Expression", "Quantity"]

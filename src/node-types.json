@@ -112,16 +112,6 @@
     "type": "unit",
     "named": true,
     "fields": {
-      "base": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "unit_term",
-            "named": true
-          }
-        ]
-      },
       "divisive": {
         "multiple": true,
         "required": false,
@@ -130,6 +120,16 @@
             "type": "/",
             "named": false
           },
+          {
+            "type": "unit_term",
+            "named": true
+          }
+        ]
+      },
+      "first": {
+        "multiple": false,
+        "required": true,
+        "types": [
           {
             "type": "unit_term",
             "named": true

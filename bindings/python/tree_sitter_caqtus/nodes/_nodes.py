@@ -1,7 +1,9 @@
+from typing import Optional
+
 import attrs
 
 type Number = int | float
-type Scalar = Number
+type Scalar = Number | Quantity
 type Expression = Variable | Scalar
 
 
@@ -18,3 +20,20 @@ class Variable:
     """
 
     names: tuple[str, ...]
+
+
+@attrs.frozen
+class Quantity:
+    """Represents a quantity in an expression.
+
+    Attributes:
+        magnitude: The magnitude of the quantity.
+        multiplicative_units: The units that are at the numerator of the quantity.
+            Each unit is a tuple of the unit name and the exponent.
+        divisional_units: The units that are at the denominator of the quantity.
+            Each unit is a tuple of the unit name and the exponent.
+    """
+
+    magnitude: float
+    multiplicative_units: tuple[tuple[str, Optional[int]], ...]
+    divisional_units: tuple[tuple[str, Optional[int]], ...]

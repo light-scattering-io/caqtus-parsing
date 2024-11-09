@@ -3,6 +3,7 @@
 from importlib.resources import files as _files
 
 from ._binding import language  # noqa: F401
+from ._parser import parse
 
 
 def _get_query(name, file):
@@ -28,6 +29,7 @@ def __getattr__(name):
 
 __all__ = [
     "language",
+    "parse",
     # "HIGHLIGHTS_QUERY",
     # "INJECTIONS_QUERY",
     # "LOCALS_QUERY",

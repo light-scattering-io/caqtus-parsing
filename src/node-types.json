@@ -28,6 +28,16 @@
     }
   },
   {
+    "type": "float",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "integer",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "quantity",
     "named": true,
     "fields": {
@@ -177,14 +187,6 @@
   {
     "type": "^",
     "named": false
-  },
-  {
-    "type": "float",
-    "named": true
-  },
-  {
-    "type": "integer",
-    "named": true
   },
   {
     "type": "name",

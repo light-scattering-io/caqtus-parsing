@@ -2,13 +2,13 @@
 Quantity
 ========
 
-12 MHz
+12.5 MHz
 
 ---
 
     (expression
       (quantity
-        (integer)
+        (float)
         (unit
           (unit_term))))
 
@@ -32,7 +32,7 @@ Multiplicative unit
 Multiplicative and divisive unit
 ================================
 
-12 MHz*cm/J
+-12 MHz*cm/J
 
 ---
 
@@ -77,12 +77,12 @@ Degree
 Percent
 =======
 
-10%
+10e-1 %
 
 ---
 
     (expression
       (quantity
-        (integer)
+        (float)
         (unit
           (unit_term))))

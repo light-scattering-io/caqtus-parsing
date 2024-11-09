@@ -32,6 +32,25 @@ module.exports = grammar({
       $.float,
     ),
 
+
+    integer: $ => seq(
+      optional(SIGN),
+      DIGITS,
+    ),
+
+    float: $ => {
+      const exponent = seq(/[eE][+-]?/, DIGITS);
+
+      return seq(
+        optional(SIGN),
+        choice(
+          seq(DIGITS, '.', optional(DIGITS), optional(exponent)),
+          seq(optional(DIGITS), '.', DIGITS, optional(exponent)),
+          seq(DIGITS, exponent),
+        ),
+      );
+
+    },
     quantity: $ => seq(
       field("magnitude", $._number),
       field("unit", $.unit),
@@ -49,24 +68,5 @@ module.exports = grammar({
       field("base", choice(/[a-zA-Z]+/, '°', '%')),
       field("exponent", optional(seq(choice('^', '**'), $.integer))),
     ),
-
-
-    integer: _ => token(seq(
-      optional(SIGN),
-      DIGITS,
-    )),
-
-    float: _ => {
-      const exponent = seq(/[eE][+-]?/, DIGITS);
-
-      return token(seq(
-        optional(SIGN),
-        choice(
-          seq(DIGITS, '.', optional(DIGITS), optional(exponent)),
-          seq(optional(DIGITS), '.', DIGITS, optional(exponent)),
-          seq(DIGITS, exponent),
-        ),
-      ));
-    },
   }
 });

@@ -1,6 +1,8 @@
 import attrs
 
-type Expression = Variable
+type Number = int | float
+type Scalar = Number
+type Expression = Variable | Scalar
 
 
 @attrs.frozen

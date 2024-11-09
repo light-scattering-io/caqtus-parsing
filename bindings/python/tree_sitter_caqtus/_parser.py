@@ -11,21 +11,25 @@ parser = Parser(CAQTUS_LANGUAGE)
 def parse(code: str) -> Expression:
     tree = parser.parse(bytes(code, "utf-8"))
 
-    if tree.root_node.has_error:
-        error_node = find_first_error(tree.root_node)
+    root_node = tree.root_node
+    assert root_node.type == "expression"
+    assert root_node.text
+
+    if root_node.has_error:
+        error_node = find_first_error(root_node)
         raise InvalidSyntaxError(
             f"Invalid syntax encountered while parsing expression <{code}>",
             (
                 "",
                 1,
                 error_node.byte_range[0] + 1,
-                tree.root_node.text.decode("utf-8"),
+                root_node.text.decode("utf-8"),
                 1,
                 error_node.byte_range[1] + 1,
             ),
         )
 
-    return build_expression_from_node(tree.root_node)
+    return build_expression(tree.root_node)
 
 
 def find_first_error(node: Node) -> Node:
@@ -37,12 +41,26 @@ def find_first_error(node: Node) -> Node:
         if error:
             return error
 
+    raise AssertionError("No error node found")
 
-def build_expression_from_node(node: Node) -> Expression:
-    match node:
-        case Node(type="expression"):
 
+def build_expression(node: Node) -> Expression:
+    assert node.type == "expression"
+    assert len(node.children) == 1
+    child = node.children[0]
+    assert child.text
+
+    match child:
+        case Node(type="variable"):
             return build_variable(node.children[0])
+        case Node(type="integer"):
+            return int(child.text.decode("utf-8"))
+        case Node(type="float"):
+            return float(child.text.decode("utf-8"))
+        case Node(type="quantity"):
+            raise NotImplementedError("Quantity parsing is not implemented yet")
+        case Node(type="call"):
+            raise NotImplementedError("Call parsing is not implemented yet")
         case _:
             raise AssertionError(f"Unexpected node type: {node.type}")
 
@@ -50,9 +68,13 @@ def build_expression_from_node(node: Node) -> Expression:
 def build_variable(node: Node) -> Variable:
     assert node.type == "variable"
 
-    names = tuple(child.text.decode("utf-8") for child in node.children)
+    names = []
 
-    return Variable(names)
+    for child in node.children:
+        assert child.text
+        names.append(child.text.decode("utf-8"))
+
+    return Variable(tuple(names))
 
 
 class ParsingError(Exception):

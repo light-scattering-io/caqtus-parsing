@@ -38,3 +38,71 @@ positive integer
       (scalar
         (number
           (integer))))
+
+================
+floating point
+================
+
+3.14159
+
+---
+
+    (expression
+      (scalar
+        (number
+          (float))))
+
+================
+negative floating point
+================
+
+-.14159
+
+---
+
+    (expression
+      (scalar
+        (number
+          (float))))
+
+===================
+scientific notation
+===================
+
+6.02e23
+
+---
+
+    (expression
+      (scalar
+        (number
+          (float))))
+
+=======================================
+scientific notation - negative exponent
+=======================================
+
+1e-2
+
+---
+
+    (expression
+      (scalar
+        (number
+          (float))))
+
+===================================
+scientific notation - negative sign
+===================================
+
+-1e2
+
+---
+
+    (expression
+      (scalar
+        (number
+          (float))))
+
+
+

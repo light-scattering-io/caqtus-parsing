@@ -24,11 +24,26 @@ module.exports = grammar({
     ),
     number: $ => choice(
       $.integer,
-      // $.float,
+      $.float,
     ),
+
     integer: _ => token(seq(
-      optional(choice('+', '-')),
+      optional(/[-+]/),
       repeat1(/[0-9]+_?/),
     )),
+
+    float: _ => {
+      const digits = repeat1(/[0-9]+_?/);
+      const exponent = seq(/[eE][+-]?/, digits);
+
+      return token(seq(
+        optional(/[-+]/),
+        choice(
+          seq(digits, '.', optional(digits), optional(exponent)),
+          seq(optional(digits), '.', digits, optional(exponent)),
+          seq(digits, exponent),
+        ),
+      ));
+    },
   }
 });

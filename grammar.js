@@ -26,10 +26,9 @@ module.exports = grammar({
       $.integer,
       // $.float,
     ),
-    integer: $ => seq(
-      optional($.sign),
+    integer: _ => token(seq(
+      optional(choice('+', '-')),
       repeat1(/[0-9]+_?/),
-    ),
-    sign: _ => choice('+', '-'),
+    )),
   }
 });

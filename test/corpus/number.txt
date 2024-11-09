@@ -1,0 +1,40 @@
+================
+unsigned integer
+================
+
+123
+
+---
+
+    (expression
+      (scalar
+        (number
+          (integer))))
+
+
+================
+negative integer
+================
+
+-100
+
+---
+
+    (expression
+      (scalar
+        (number
+          (integer))))
+
+
+================
+positive integer
+================
+
++0123
+
+---
+
+    (expression
+      (scalar
+        (number
+          (integer))))

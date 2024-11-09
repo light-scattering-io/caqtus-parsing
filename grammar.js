@@ -7,6 +7,9 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
+const DIGITS = repeat1(/[0-9]+_?/);
+const SIGN = /[-+]/;
+
 module.exports = grammar({
   name: "caqtus",
   rules: {
@@ -41,26 +44,27 @@ module.exports = grammar({
     ),
 
     unit_term: $ => seq(
-      field("base", /[a-zA-Z]+/),
+      // Percents and degrees are allowed to be used as units.
+      // Doesn't allow °C.
+      field("base", choice(/[a-zA-Z]+/, '°', '%')),
       field("exponent", optional(seq(choice('^', '**'), $.integer))),
     ),
 
 
     integer: _ => token(seq(
-      optional(/[-+]/),
-      repeat1(/[0-9]+_?/),
+      optional(SIGN),
+      DIGITS,
     )),
 
     float: _ => {
-      const digits = repeat1(/[0-9]+_?/);
-      const exponent = seq(/[eE][+-]?/, digits);
+      const exponent = seq(/[eE][+-]?/, DIGITS);
 
       return token(seq(
-        optional(/[-+]/),
+        optional(SIGN),
         choice(
-          seq(digits, '.', optional(digits), optional(exponent)),
-          seq(optional(digits), '.', digits, optional(exponent)),
-          seq(digits, exponent),
+          seq(DIGITS, '.', optional(DIGITS), optional(exponent)),
+          seq(optional(DIGITS), '.', DIGITS, optional(exponent)),
+          seq(DIGITS, exponent),
         ),
       ));
     },

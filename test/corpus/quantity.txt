@@ -48,7 +48,22 @@ Multiplicative and divisive unit
 Unit with power
 ===============
 
-12 MHz^-2
+1.5 MHz^-2
+
+---
+
+    (expression
+      (quantity
+        (float)
+        (unit
+          (unit_term
+            (integer)))))
+
+======
+Degree
+======
+
+120 °
 
 ---
 
@@ -56,7 +71,18 @@ Unit with power
       (quantity
         (integer)
         (unit
-          (unit_term
-            (integer)))))
+          (unit_term))))
 
+=======
+Percent
+=======
 
+10%
+
+---
+
+    (expression
+      (quantity
+        (integer)
+        (unit
+          (unit_term))))

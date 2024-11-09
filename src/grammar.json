@@ -151,8 +151,21 @@
           "type": "FIELD",
           "name": "base",
           "content": {
-            "type": "PATTERN",
-            "value": "[a-zA-Z]+"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[a-zA-Z]+"
+              },
+              {
+                "type": "STRING",
+                "value": "°"
+              },
+              {
+                "type": "STRING",
+                "value": "%"
+              }
+            ]
           }
         },
         {

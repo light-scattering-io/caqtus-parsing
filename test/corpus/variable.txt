@@ -1,0 +1,54 @@
+===========
+Simple name
+===========
+
+variable_name
+
+---
+
+(expression
+    (variable
+        (name)))
+
+===========
+Dotted name
+===========
+
+variable.attribute_name
+
+---
+
+(expression
+    (variable
+        (name)
+        (name)))
+
+===================
+Invalid dotted name
+===================
+
+variable..name
+
+---
+
+    (expression
+      (variable
+        (name)
+        (ERROR)
+        (name)))
+
+============
+Missing name
+============
+
+variable.name.
+
+---
+
+(expression
+      (variable
+        (name)
+        (name)
+        (MISSING name)))
+
+

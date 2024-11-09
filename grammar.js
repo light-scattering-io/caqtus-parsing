@@ -9,9 +9,27 @@
 
 module.exports = grammar({
   name: "caqtus",
-
   rules: {
-    // TODO: add the actual grammar rules
-    source_file: $ => "hello"
+    expression: $ => choice(
+      $.variable,
+      $.scalar,
+    ),
+    variable: $ => seq(
+      $.name,
+      repeat(seq('.', $.name)),
+    ),
+    name: _ => /[a-zA-Z][a-zA-Z0-9_]*/,
+    scalar: $ => choice(
+      $.number,
+    ),
+    number: $ => choice(
+      $.integer,
+      // $.float,
+    ),
+    integer: $ => seq(
+      optional($.sign),
+      repeat1(/[0-9]+_?/),
+    ),
+    sign: _ => choice('+', '-'),
   }
 });

@@ -40,3 +40,5 @@ dist/
 *.zip
 
 /package-lock.json
+/parser.exp
+/parser.lib

@@ -3,7 +3,7 @@
 from importlib.resources import files as _files
 
 from ._binding import language  # noqa: F401
-from ._parser import parse
+from ._parser import parse, InvalidSyntaxError, ParsingError
 
 
 def _get_query(name, file):
@@ -30,6 +30,8 @@ def __getattr__(name):
 __all__ = [
     "language",
     "parse",
+    "InvalidSyntaxError",
+    "ParsingError",
     # "HIGHLIGHTS_QUERY",
     # "INJECTIONS_QUERY",
     # "LOCALS_QUERY",

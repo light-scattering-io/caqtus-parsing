@@ -22,9 +22,8 @@ f(x)
   (call
     (NAME)
     (args
-      (expression
-        (variable
-          (NAME))))))
+      (variable
+        (NAME)))))
 
 ==================
 Multiple arguments
@@ -38,15 +37,12 @@ f(x, y, z)
   (call
     (NAME)
     (args
-      (expression
-        (variable
-          (NAME)))
-      (expression
-        (variable
-          (NAME)))
-      (expression
-        (variable
-          (NAME))))))
+      (variable
+        (NAME))
+      (variable
+        (NAME))
+      (variable
+        (NAME)))))
 
 
 ================
@@ -61,11 +57,11 @@ f(12.5 MHz)
   (call
     (NAME)
     (args
-      (expression
-        (quantity
-          (float)
-          (unit
-            (unit_term)))))))
+      (quantity
+        (float)
+        (units
+          (unit_term
+            (unit)))))))
 
 =======================
 Call on variable dotted
@@ -79,7 +75,6 @@ f(x.y)
   (call
     (NAME)
     (args
-      (expression
-        (variable
-          (NAME)
-          (NAME))))))
+      (variable
+        (NAME)
+        (NAME)))))

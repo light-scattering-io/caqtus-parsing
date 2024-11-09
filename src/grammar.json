@@ -3,6 +3,10 @@
   "name": "caqtus",
   "rules": {
     "expression": {
+      "type": "SYMBOL",
+      "name": "_sub_expression"
+    },
+    "_sub_expression": {
       "type": "CHOICE",
       "members": [
         {
@@ -287,15 +291,15 @@
         },
         {
           "type": "FIELD",
-          "name": "unit",
+          "name": "units",
           "content": {
             "type": "SYMBOL",
-            "name": "unit"
+            "name": "units"
           }
         }
       ]
     },
-    "unit": {
+    "units": {
       "type": "SEQ",
       "members": [
         {
@@ -353,10 +357,10 @@
       "members": [
         {
           "type": "FIELD",
-          "name": "base",
+          "name": "unit",
           "content": {
             "type": "SYMBOL",
-            "name": "_SINGLE_UNIT"
+            "name": "unit"
           }
         },
         {
@@ -395,25 +399,22 @@
         }
       ]
     },
-    "_SINGLE_UNIT": {
-      "type": "TOKEN",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "PATTERN",
-            "value": "[a-zA-Z]+"
-          },
-          {
-            "type": "STRING",
-            "value": "°"
-          },
-          {
-            "type": "STRING",
-            "value": "%"
-          }
-        ]
-      }
+    "unit": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[a-zA-Z]+"
+        },
+        {
+          "type": "STRING",
+          "value": "°"
+        },
+        {
+          "type": "STRING",
+          "value": "%"
+        }
+      ]
     },
     "call": {
       "type": "PREC",
@@ -461,7 +462,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "expression"
+          "name": "_sub_expression"
         },
         {
           "type": "REPEAT",
@@ -474,7 +475,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "expression"
+                "name": "_sub_expression"
               }
             ]
           }

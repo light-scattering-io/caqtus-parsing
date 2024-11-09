@@ -17,11 +17,14 @@ const PREC = {
 module.exports = grammar({
   name: "caqtus",
   rules: {
-    expression: $ => choice(
+    expression: $ => $._sub_expression,
+
+    _sub_expression: $ => choice(
       $.variable,
       $._scalar,
       $.call,
     ),
+
 
     variable: $ => seq(
       $.NAME,
@@ -67,23 +70,23 @@ module.exports = grammar({
 
     quantity: $ => seq(
       field("magnitude", $.float),
-      field("unit", $.unit),
+      field("units", $.units),
     ),
 
-    unit: $ => seq(
+    units: $ => seq(
       field("first", $.unit_term),
       field("multiplicative", repeat(seq('*', $.unit_term))),
       field("divisive", repeat(seq('/', $.unit_term))),
     ),
 
     unit_term: $ => seq(
-      field("base", $._SINGLE_UNIT),
+      field("unit", $.unit),
       field("exponent", optional(seq(choice('^', '**'), $.integer))),
     ),
 
     // Percents and degrees are allowed to be used as units.
     // Doesn't allow °C.
-    _SINGLE_UNIT: _ => token(choice(/[a-zA-Z]+/, '°', '%')),
+    unit: _ => choice(/[a-zA-Z]+/, '°', '%'),
 
     call: $ => prec(PREC.call, seq(
       field('function', $.NAME),
@@ -93,8 +96,8 @@ module.exports = grammar({
     )),
 
     args: $ => seq(
-      $.expression,
-      repeat(seq(',', $.expression)),
+      $._sub_expression,
+      repeat(seq(',', $._sub_expression)),
     ),
   }
 });

@@ -8,7 +8,23 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "quantity",
+          "named": true
+        },
+        {
+          "type": "variable",
           "named": true
         }
       ]
@@ -96,6 +112,45 @@
           }
         ]
       },
+      "units": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "units",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "unit",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "unit_term",
+    "named": true,
+    "fields": {
+      "exponent": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "**",
+            "named": false
+          },
+          {
+            "type": "^",
+            "named": false
+          },
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      },
       "unit": {
         "multiple": false,
         "required": true,
@@ -109,7 +164,7 @@
     }
   },
   {
-    "type": "unit",
+    "type": "units",
     "named": true,
     "fields": {
       "divisive": {
@@ -153,30 +208,6 @@
     }
   },
   {
-    "type": "unit_term",
-    "named": true,
-    "fields": {
-      "exponent": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "**",
-            "named": false
-          },
-          {
-            "type": "^",
-            "named": false
-          },
-          {
-            "type": "integer",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "variable",
     "named": true,
     "fields": {},
@@ -190,6 +221,10 @@
         }
       ]
     }
+  },
+  {
+    "type": "%",
+    "named": false
   },
   {
     "type": "(",
@@ -225,6 +260,10 @@
   },
   {
     "type": "^",
+    "named": false
+  },
+  {
+    "type": "°",
     "named": false
   }
 ]

@@ -6,11 +6,12 @@ Quantity
 
 ---
 
-    (expression
-      (quantity
-        (float)
-        (unit
-          (unit_term))))
+(expression
+  (quantity
+    (float)
+    (units
+      (unit_term
+        (unit)))))
 
 ===================
 Multiplicative unit
@@ -20,13 +21,16 @@ Multiplicative unit
 
 ---
 
-    (expression
-      (quantity
-        (float)
-        (unit
-          (unit_term)
-          (unit_term)
-          (unit_term))))
+(expression
+  (quantity
+    (float)
+    (units
+      (unit_term
+        (unit))
+      (unit_term
+        (unit))
+      (unit_term
+        (unit)))))
 
 ================================
 Multiplicative and divisive unit
@@ -36,13 +40,16 @@ Multiplicative and divisive unit
 
 ---
 
-    (expression
-      (quantity
-        (float)
-        (unit
-          (unit_term)
-          (unit_term)
-          (unit_term))))
+(expression
+  (quantity
+    (float)
+    (units
+      (unit_term
+        (unit))
+      (unit_term
+        (unit))
+      (unit_term
+        (unit)))))
 
 ===============
 Unit with power
@@ -52,12 +59,13 @@ Unit with power
 
 ---
 
-    (expression
-      (quantity
-        (float)
-        (unit
-          (unit_term
-            (integer)))))
+(expression
+  (quantity
+    (float)
+    (units
+      (unit_term
+        (unit)
+        (integer)))))
 
 ======
 Degree
@@ -67,11 +75,12 @@ Degree
 
 ---
 
-    (expression
-      (quantity
-        (float)
-        (unit
-          (unit_term))))
+(expression
+  (quantity
+    (float)
+    (units
+      (unit_term
+        (unit)))))
 
 =======
 Percent
@@ -81,8 +90,9 @@ Percent
 
 ---
 
-    (expression
-      (quantity
-        (float)
-        (unit
-          (unit_term))))
+(expression
+  (quantity
+    (float)
+    (units
+      (unit_term
+        (unit)))))

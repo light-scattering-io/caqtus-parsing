@@ -15,7 +15,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 authors = [{ name = "light-scattering-io", email = "lecaqtus66@gmail.com" }]
-requires-python = ">=3.9"
+requires-python = ">=3.12"
 license.text = "MIT"
 readme = "README.md"
 dependencies = [
@@ -40,7 +40,7 @@ dependencies = [
 ]
 
 [tool.cibuildwheel]
-build = "cp39-*"
+build = "cp312-*"
 build-frontend = "build"
 test-requires = "pytest"
-test-command = "pytest {package}/tests"
+test-command = "pytest {project}/bindings/python/tests"

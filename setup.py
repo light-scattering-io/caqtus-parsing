@@ -18,13 +18,13 @@ class BdistWheel(bdist_wheel):
     def get_tag(self):
         python, abi, platform = super().get_tag()
         if python.startswith("cp"):
-            python, abi = "cp39", "abi3"
+            python, abi = "cp312", "abi3"
         return python, abi, platform
 
 
 setup(
-    packages=find_packages("bindings/python"),
-    package_dir={"": "bindings/python"},
+    packages=find_packages("bindings/python/src"),
+    package_dir={"": "bindings/python/src"},
     package_data={
         "caqtus_parsing": ["*.pyi", "py.typed"],
         "caqtus_parsing.queries": ["*.scm"],
@@ -34,17 +34,21 @@ setup(
         Extension(
             name="_binding",
             sources=[
-                "bindings/python/caqtus_parsing/binding.c",
+                "bindings/python/src/caqtus_parsing/binding.c",
                 "src/parser.c",
                 # NOTE: if your language uses an external scanner, add it here.
             ],
-            extra_compile_args=[
-                "-std=c11",
-                "-fvisibility=hidden",
-            ] if system() != "Windows" else [
-                "/std:c11",
-                "/utf-8",
-            ],
+            extra_compile_args=(
+                [
+                    "-std=c11",
+                    "-fvisibility=hidden",
+                ]
+                if system() != "Windows"
+                else [
+                    "/std:c11",
+                    "/utf-8",
+                ]
+            ),
             define_macros=[
                 ("Py_LIMITED_API", "0x03090000"),
                 ("PY_SSIZE_T_CLEAN", None),
@@ -54,9 +58,6 @@ setup(
             py_limited_api=True,
         )
     ],
-    cmdclass={
-        "build": Build,
-        "bdist_wheel": BdistWheel
-    },
-    zip_safe=False
+    cmdclass={"build": Build, "bdist_wheel": BdistWheel},
+    zip_safe=False,
 )

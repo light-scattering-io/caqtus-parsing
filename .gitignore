@@ -42,4 +42,4 @@ dist/
 /package-lock.json
 /parser.exp
 /parser.lib
-/bindings/python/caqtus_parsing/_binding.pyd
+/bindings/python/src/caqtus_parsing/_binding.pyd

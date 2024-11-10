@@ -4,7 +4,8 @@ import attrs
 
 type Number = int | float
 type Scalar = Number | Quantity
-type Expression = Variable | Scalar | Call
+type BinaryOperator = Add | Subtract | Multiply | Divide
+type Expression = Variable | Scalar | Call | BinaryOperator
 
 
 @attrs.frozen
@@ -66,3 +67,51 @@ class Call:
 
     function: str
     args: tuple[Expression, ...] = ()
+
+@attrs.frozen
+class Add:
+    """Represents an addition operation in an expression.
+
+    Attributes:
+        left: The left operand.
+        right: The right operand.
+    """
+
+    left: Expression
+    right: Expression
+
+@attrs.frozen
+class Subtract:
+    """Represents a subtraction operation in an expression.
+
+    Attributes:
+        left: The left operand.
+        right: The right operand.
+    """
+
+    left: Expression
+    right: Expression
+
+@attrs.frozen
+class Multiply:
+    """Represents a multiplication operation in an expression.
+
+    Attributes:
+        left: The left operand.
+        right: The right operand.
+    """
+
+    left: Expression
+    right: Expression
+
+@attrs.frozen
+class Divide:
+    """Represents a division operation in an expression.
+
+    Attributes:
+        left: The left operand.
+        right: The right operand.
+    """
+
+    left: Expression
+    right: Expression

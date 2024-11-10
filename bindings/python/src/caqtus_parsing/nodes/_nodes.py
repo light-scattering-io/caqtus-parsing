@@ -36,7 +36,7 @@ class Quantity:
 
     magnitude: float
     multiplicative_units: tuple[UnitTerm, ...]
-    divisional_units: tuple[UnitTerm, ...]
+    divisional_units: tuple[UnitTerm, ...] = ()
 
 
 @attrs.frozen
@@ -50,7 +50,7 @@ class UnitTerm:
     """
 
     unit: str
-    exponent: int | None
+    exponent: int | None = None
 
 
 @attrs.frozen

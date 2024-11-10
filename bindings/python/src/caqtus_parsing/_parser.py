@@ -12,6 +12,7 @@ from .nodes import (
     Subtract,
     Multiply,
     Divide,
+    Power,
 )
 
 CAQTUS_LANGUAGE = Language(language())
@@ -23,6 +24,7 @@ BINARY_OPERATOR_CLASSES = {
     "-": Subtract,
     "*": Multiply,
     "/": Divide,
+    "**": Power,
 }
 
 
@@ -187,7 +189,7 @@ def build_binary_operator(node: Node) -> BinaryOperator:
     assert operator_node.text
     operator = operator_node.text.decode("utf-8")
 
-    assert operator in ("+", "-", "*", "/")
+    assert operator in ("+", "-", "*", "/", "**")
 
     left_node = node.child_by_field_name("left")
     assert left_node is not None

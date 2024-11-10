@@ -4,7 +4,7 @@ import attrs
 
 type Number = int | float
 type Scalar = Number | Quantity
-type BinaryOperator = Add | Subtract | Multiply | Divide
+type BinaryOperator = Add | Subtract | Multiply | Divide | Power
 type Expression = Variable | Scalar | Call | BinaryOperator
 
 
@@ -115,3 +115,15 @@ class Divide:
 
     left: Expression
     right: Expression
+
+@attrs.frozen
+class Power:
+    """Represents a power operation in an expression.
+
+    Attributes:
+        base: The base operand.
+        exponent: The exponent operand.
+    """
+
+    base: Expression
+    exponent: Expression

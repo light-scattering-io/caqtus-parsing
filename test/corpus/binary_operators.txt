@@ -1,0 +1,67 @@
+========
+Addition
+========
+
+1 + 1
+
+---
+
+(expression
+  (binary_operator
+    (integer)
+    (integer)))
+
+==============
+Multiplication
+==============
+
+2 * 3.5
+
+---
+
+(expression
+  (binary_operator
+    (integer)
+    (float)))
+
+
+=======================
+Quantity multiplication
+=======================
+
+2 MHz * dBm / J * variable
+
+---
+
+(expression
+  (binary_operator
+    (quantity
+      (float)
+      (units
+        (unit_term
+          (unit))
+        (unit_term
+          (unit))
+        (unit_term
+          (unit))))
+    (variable
+        (NAME))))
+
+===========================
+Addition and Multiplication
+===========================
+
+1 + 2.5 * 5 MHz
+
+---
+
+(expression
+  (binary_operator
+    (integer)
+    (binary_operator
+      (float)
+      (quantity
+        (float)
+        (units
+          (unit_term
+            (unit)))))))

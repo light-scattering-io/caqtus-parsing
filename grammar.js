@@ -10,7 +10,9 @@
 const PREC = {
   float: 1,
   integer: 2,
-  call: 3,
+  plus: 3,
+  times: 4,
+  call: 5,
 };
 
 
@@ -23,6 +25,7 @@ module.exports = grammar({
       $.variable,
       $._scalar,
       $.call,
+      $.binary_operator,
     ),
 
 
@@ -73,10 +76,18 @@ module.exports = grammar({
       field("units", $.units),
     ),
 
-    units: $ => seq(
+    units: $ => prec.right(seq(
       field("first", $.unit_term),
-      field("multiplicative", repeat(seq(optional('*'), $.unit_term))),
-      field("divisive", repeat(seq('/', $.unit_term))),
+      field("multiplicative", optional($._units_mult_part)),
+      field("divisive", optional($._units_div_part)),
+    )),
+
+    _units_mult_part: $ => repeat1(
+      seq(optional('*'), $.unit_term)
+    ),
+
+    _units_div_part: $ => repeat1(
+      seq('/', $.unit_term)
     ),
 
     unit_term: $ => seq(
@@ -99,5 +110,20 @@ module.exports = grammar({
       $._sub_expression,
       repeat(seq(',', $._sub_expression)),
     ),
+
+    binary_operator: $ => {
+      const table = [
+        [prec.left, '+', PREC.plus],
+        [prec.left, '-', PREC.plus],
+        [prec.left, '*', PREC.times],
+        [prec.left, '/', PREC.times],
+      ];
+
+      return choice(...table.map(([fn, operator, precedence]) => fn(precedence, seq(
+        field('left', $._sub_expression),
+        field('operator', operator),
+        field('right', $._sub_expression),
+      ))));
+    },
   }
 });

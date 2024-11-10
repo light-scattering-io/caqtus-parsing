@@ -1,3 +1,5 @@
+import pytest
+
 import caqtus_parsing
 from caqtus_parsing.nodes import Call, Variable, Quantity, UnitTerm
 
@@ -86,3 +88,10 @@ def test_call_quantity_product():
             ),
         ),
     )
+
+
+def test_invalid_dotted_name():
+    s = "f.g()"
+
+    with pytest.raises(caqtus_parsing.InvalidSyntaxError):
+        caqtus_parsing.parse(s)

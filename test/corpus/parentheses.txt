@@ -1,0 +1,43 @@
+==========
+Arithmetic
+==========
+
+(1.1 + 2) * var
+
+---
+
+(expression
+  (binary_operator
+    (binary_operator
+      (float)
+      (integer))
+    (variable
+        (NAME))))
+
+====
+Call
+====
+
+(f(x) + 3) * 5 KHz/day
+
+---
+
+(expression
+  (binary_operator
+    (binary_operator
+      (call
+        (NAME)
+        (args
+          (variable
+            (NAME))))
+      (integer))
+    (quantity
+      (float)
+      (units
+        (unit_term
+          (unit))
+        (unit_term
+            (unit))))))
+
+
+

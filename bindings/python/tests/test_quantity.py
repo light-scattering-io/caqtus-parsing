@@ -10,7 +10,7 @@ def test_quantity():
     assert parse("1.0 m/s") == Quantity(
         1.0, (UnitTerm("m", None),), (UnitTerm("s", None),)
     )
-    assert parse("1.0 m s^-1") == Quantity(
+    assert parse("1.0 m s**-1") == Quantity(
         1.0,
         (
             UnitTerm("m", None),

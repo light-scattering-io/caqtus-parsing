@@ -57,7 +57,7 @@ def test_call_quantity():
 
 
 def test_call_quantity_with_exponent():
-    s = "f(1.0m^2)"
+    s = "f(1.0m**2)"
 
     result = caqtus_parsing.parse(s)
     assert result == Call(
@@ -72,7 +72,7 @@ def test_call_quantity_with_exponent():
 
 
 def test_call_quantity_product():
-    s = "f(1.0m^2*kg/s)"
+    s = "f(1.0m**2*kg/s)"
 
     result = caqtus_parsing.parse(s)
     assert result == Call(

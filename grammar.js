@@ -8,11 +8,12 @@
 // @ts-check
 
 const PREC = {
-  float: 1,
-  integer: 2,
-  plus: 3,
-  times: 4,
-  call: 5,
+  parenthesized_expression: 1,
+  float: 2,
+  integer: 3,
+  plus: 4,
+  times: 5,
+  call: 6,
 };
 
 
@@ -22,10 +23,19 @@ module.exports = grammar({
     expression: $ => $._sub_expression,
 
     _sub_expression: $ => choice(
+      $._parenthesized_expression,
       $.variable,
       $._scalar,
       $.call,
       $.binary_operator,
+    ),
+
+    _parenthesized_expression: $ => prec(PREC.parenthesized_expression,
+      seq(
+        '(',
+        $._sub_expression,
+        ')',
+      )
     ),
 
 

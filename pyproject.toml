@@ -15,7 +15,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 authors = [{ name = "light-scattering-io", email = "lecaqtus66@gmail.com" }]
-requires-python = ">=3.9"
+requires-python = ">=3.12"
 license.text = "MIT"
 readme = "README.md"
 dependencies = [
@@ -36,8 +36,9 @@ dependencies = [
   "isort",
   "setuptools",
   "build",
+  "cibuildwheel",
 ]
 
 [tool.cibuildwheel]
-build = "cp39-*"
+build = ["cp312-*", "cp313-*"]
 build-frontend = "build"

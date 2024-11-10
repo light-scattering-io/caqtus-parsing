@@ -76,6 +76,14 @@ module.exports = grammar({
       field("units", $.units),
     ),
 
+    // There is an ambiguity between the units and * and / operators.
+    // It is resolved by making units consume as much as possible.
+    // It means that 1 MHz * variable and 1 MHz / variable are parsed as quantities
+    // with variable in the units part, and not as a multiplication or division of a
+    // quantity by a variable.
+    // It is necessary to disambiguate it like this: (1 MHz) * variable.
+    // Maybe one solution to avoid this would be to explicitly define the units
+    // available in the grammar?
     units: $ => prec.right(seq(
       field("first", $.unit_term),
       field("multiplicative", optional($._units_mult_part)),

@@ -1,11 +1,29 @@
 from tree_sitter import Language, Parser, Node
 
 from ._binding import language  # noqa: F401
-from .nodes import Variable, Expression, Quantity, UnitTerm, Call
+from .nodes import (
+    Variable,
+    Expression,
+    Quantity,
+    UnitTerm,
+    Call,
+    BinaryOperator,
+    Add,
+    Subtract,
+    Multiply,
+    Divide,
+)
 
 CAQTUS_LANGUAGE = Language(language())
 
 parser = Parser(CAQTUS_LANGUAGE)
+
+BINARY_OPERATOR_CLASSES = {
+    "+": Add,
+    "-": Subtract,
+    "*": Multiply,
+    "/": Divide,
+}
 
 
 def parse(code: str) -> Expression:
@@ -63,6 +81,8 @@ def build_subexpression(node: Node) -> Expression:
             return build_quantity(node)
         case Node(type="call"):
             return build_call(node)
+        case Node(type="binary_operator"):
+            return build_binary_operator(node)
         case _:
             raise AssertionError(f"Unexpected node type: {node.type}")
 
@@ -149,6 +169,27 @@ def build_call(node: Node) -> Call:
 
     arguments = [build_subexpression(child) for child in children]
     return Call(function, tuple(arguments))
+
+
+def build_binary_operator(node: Node) -> BinaryOperator:
+    assert node.type == "binary_operator"
+
+    operator_node = node.child_by_field_name("operator")
+    assert operator_node is not None
+    assert operator_node.text
+    operator = operator_node.text.decode("utf-8")
+
+    assert operator in ("+", "-", "*", "/")
+
+    left_node = node.child_by_field_name("left")
+    assert left_node is not None
+    left = build_subexpression(left_node)
+
+    right_node = node.child_by_field_name("right")
+    assert right_node is not None
+    right = build_subexpression(right_node)
+
+    return BINARY_OPERATOR_CLASSES[operator](left, right)
 
 
 def get_child_by_field_name(node: Node, field_name: str) -> Node:

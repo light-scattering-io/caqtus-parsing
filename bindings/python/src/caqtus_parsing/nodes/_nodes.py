@@ -65,4 +65,4 @@ class Call:
     """
 
     function: str
-    args: tuple[Expression, ...]
+    args: tuple[Expression, ...] = ()

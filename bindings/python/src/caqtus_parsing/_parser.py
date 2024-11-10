@@ -1,7 +1,7 @@
 from tree_sitter import Language, Parser, Node
 
 from ._binding import language  # noqa: F401
-from .nodes import Variable, Expression, Quantity, UnitTerm
+from .nodes import Variable, Expression, Quantity, UnitTerm, Call
 
 CAQTUS_LANGUAGE = Language(language())
 
@@ -46,20 +46,23 @@ def find_first_error(node: Node) -> Node | None:
 def build_expression(node: Node) -> Expression:
     assert node.type == "expression"
     assert len(node.children) == 1
-    child = node.children[0]
-    assert child.text
+    return build_subexpression(node.children[0])
 
-    match child:
+
+def build_subexpression(node: Node) -> Expression:
+    assert node.text
+
+    match node:
         case Node(type="variable"):
-            return build_variable(node.children[0])
+            return build_variable(node)
         case Node(type="integer"):
-            return int(child.text.decode("utf-8"))
+            return int(node.text.decode("utf-8"))
         case Node(type="float"):
-            return float(child.text.decode("utf-8"))
+            return float(node.text.decode("utf-8"))
         case Node(type="quantity"):
-            return build_quantity(node.children[0])
+            return build_quantity(node)
         case Node(type="call"):
-            raise NotImplementedError("Call parsing is not implemented yet")
+            return build_call(node)
         case _:
             raise AssertionError(f"Unexpected node type: {node.type}")
 
@@ -126,6 +129,26 @@ def build_unit_term(node: Node) -> UnitTerm:
         exponent = int(exponent_node.text.decode("utf-8"))
 
         return UnitTerm(base, exponent)
+
+
+def build_call(node: Node) -> Call:
+    assert node.type == "call"
+
+    function_node = node.child_by_field_name("function")
+    assert function_node is not None
+    assert function_node.type == "NAME"
+    assert function_node.text
+    function = function_node.text.decode("utf-8")
+
+    arguments_node = node.child_by_field_name("args")
+    if arguments_node is None:
+        children = []
+    else:
+        assert arguments_node.type == "args"
+        children = [child for child in arguments_node.children if child.type != ","]
+
+    arguments = [build_subexpression(child) for child in children]
+    return Call(function, tuple(arguments))
 
 
 def get_child_by_field_name(node: Node, field_name: str) -> Node:

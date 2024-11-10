@@ -42,3 +42,4 @@ dependencies = [
 [tool.cibuildwheel]
 build = ["cp312-*", "cp313-*"]
 build-frontend = "build"
+test-command = "pytest {project}/bindings/python/tests"

@@ -40,7 +40,7 @@ dependencies = [
 ]
 
 [tool.cibuildwheel]
-build = ["cp312-*", "cp313-*"]
+build = "cp39-*"
 build-frontend = "build"
 test-requires = "pytest"
 test-command = "pytest {project}/bindings/python/tests"

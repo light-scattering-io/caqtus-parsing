@@ -4,7 +4,7 @@ import attrs
 
 type Number = int | float
 type Scalar = Number | Quantity
-type Expression = Variable | Scalar
+type Expression = Variable | Scalar | Call
 
 
 @attrs.frozen
@@ -51,3 +51,18 @@ class UnitTerm:
 
     unit: str
     exponent: int | None
+
+
+@attrs.frozen
+class Call:
+    """Represents a function call in an expression.
+
+    Attributes:
+        function: The function name.
+            It is guaranteed that this is not empty and to be a simple identifier.
+            Dotted names are not allowed here.
+        args: The positional arguments passed to the function.
+    """
+
+    function: str
+    args: tuple[Expression, ...]

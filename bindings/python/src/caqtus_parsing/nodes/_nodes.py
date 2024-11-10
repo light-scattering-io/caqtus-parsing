@@ -1,4 +1,4 @@
-from typing import Optional, NewType
+from __future__ import annotations
 
 import attrs
 
@@ -21,7 +21,6 @@ class Variable:
 
     names: tuple[str, ...]
 
-Unit = NewType("Unit", str)
 
 @attrs.frozen
 class Quantity:
@@ -36,5 +35,19 @@ class Quantity:
     """
 
     magnitude: float
-    multiplicative_units: tuple[tuple[Unit, Optional[int]], ...]
-    divisional_units: tuple[tuple[Unit, Optional[int]], ...]
+    multiplicative_units: tuple[UnitTerm, ...]
+    divisional_units: tuple[UnitTerm, ...]
+
+
+@attrs.frozen
+class UnitTerm:
+    """Represents a unit term in a quantity.
+
+    Attributes:
+        unit: The base unit symbol.
+        exponent: The exponent of the base unit.
+            If this is ``None``, the exponent is 1.
+    """
+
+    unit: str
+    exponent: int | None

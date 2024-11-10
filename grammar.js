@@ -13,7 +13,8 @@ const PREC = {
   integer: 3,
   plus: 4,
   times: 5,
-  call: 6,
+  power: 6,
+  call: 7,
 };
 
 
@@ -108,9 +109,11 @@ module.exports = grammar({
       seq('/', $.unit_term)
     ),
 
-    unit_term: $ => seq(
-      field("unit", $.unit),
-      optional(seq(choice('^', '**'), field("exponent", $.integer))),
+    unit_term: $ => prec.left(
+      seq(
+        field("unit", $.unit),
+        optional(seq(choice('^', '**'), field("exponent", $.integer))),
+      )
     ),
 
     // Percents and degrees are allowed to be used as units.
@@ -135,6 +138,7 @@ module.exports = grammar({
         [prec.left, '-', PREC.plus],
         [prec.left, '*', PREC.times],
         [prec.left, '/', PREC.times],
+        [prec.right, '**', PREC.power],
       ];
 
       return choice(...table.map(([fn, operator, precedence]) => fn(precedence, seq(

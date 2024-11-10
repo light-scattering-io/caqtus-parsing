@@ -115,3 +115,23 @@ Spaced multiplicative units
         (unit)
         (integer)))))
 
+============================
+Quantity with variable power
+============================
+
+1.0 m**var
+
+---
+
+(expression
+  (binary_operator
+    (quantity
+      (float)
+      (units
+        (unit_term
+          (unit))))
+    (variable
+      (NAME))))
+
+
+

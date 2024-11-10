@@ -23,17 +23,17 @@ module.exports = grammar({
     expression: $ => $._sub_expression,
 
     _sub_expression: $ => choice(
-      $._parenthesized_expression,
+      $.parenthesized_expression,
       $.variable,
       $._scalar,
       $.call,
       $.binary_operator,
     ),
 
-    _parenthesized_expression: $ => prec(PREC.parenthesized_expression,
+    parenthesized_expression: $ => prec(PREC.parenthesized_expression,
       seq(
         '(',
-        $._sub_expression,
+        field('expression', $._sub_expression),
         ')',
       )
     ),

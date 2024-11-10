@@ -11,9 +11,9 @@
 #define ALIAS_COUNT 0
 #define TOKEN_COUNT 18
 #define EXTERNAL_TOKEN_COUNT 0
-#define FIELD_COUNT 12
+#define FIELD_COUNT 13
 #define MAX_ALIAS_SEQUENCE_LENGTH 6
-#define PRODUCTION_ID_COUNT 11
+#define PRODUCTION_ID_COUNT 12
 
 enum ts_symbol_identifiers {
   anon_sym_LPAREN = 1,
@@ -35,7 +35,7 @@ enum ts_symbol_identifiers {
   anon_sym_DASH = 17,
   sym_expression = 18,
   sym__sub_expression = 19,
-  sym__parenthesized_expression = 20,
+  sym_parenthesized_expression = 20,
   sym_variable = 21,
   sym__DOT = 22,
   sym__scalar = 23,
@@ -76,7 +76,7 @@ static const char * const ts_symbol_names[] = {
   [anon_sym_DASH] = "-",
   [sym_expression] = "expression",
   [sym__sub_expression] = "_sub_expression",
-  [sym__parenthesized_expression] = "_parenthesized_expression",
+  [sym_parenthesized_expression] = "parenthesized_expression",
   [sym_variable] = "variable",
   [sym__DOT] = "_DOT",
   [sym__scalar] = "_scalar",
@@ -117,7 +117,7 @@ static const TSSymbol ts_symbol_map[] = {
   [anon_sym_DASH] = anon_sym_DASH,
   [sym_expression] = sym_expression,
   [sym__sub_expression] = sym__sub_expression,
-  [sym__parenthesized_expression] = sym__parenthesized_expression,
+  [sym_parenthesized_expression] = sym_parenthesized_expression,
   [sym_variable] = sym_variable,
   [sym__DOT] = sym__DOT,
   [sym__scalar] = sym__scalar,
@@ -218,8 +218,8 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = false,
     .named = true,
   },
-  [sym__parenthesized_expression] = {
-    .visible = false,
+  [sym_parenthesized_expression] = {
+    .visible = true,
     .named = true,
   },
   [sym_variable] = {
@@ -296,15 +296,16 @@ enum ts_field_identifiers {
   field_args = 1,
   field_divisive = 2,
   field_exponent = 3,
-  field_first = 4,
-  field_function = 5,
-  field_left = 6,
-  field_magnitude = 7,
-  field_multiplicative = 8,
-  field_operator = 9,
-  field_right = 10,
-  field_unit = 11,
-  field_units = 12,
+  field_expression = 4,
+  field_first = 5,
+  field_function = 6,
+  field_left = 7,
+  field_magnitude = 8,
+  field_multiplicative = 9,
+  field_operator = 10,
+  field_right = 11,
+  field_unit = 12,
+  field_units = 13,
 };
 
 static const char * const ts_field_names[] = {
@@ -312,6 +313,7 @@ static const char * const ts_field_names[] = {
   [field_args] = "args",
   [field_divisive] = "divisive",
   [field_exponent] = "exponent",
+  [field_expression] = "expression",
   [field_first] = "first",
   [field_function] = "function",
   [field_left] = "left",
@@ -328,12 +330,13 @@ static const TSFieldMapSlice ts_field_map_slices[PRODUCTION_ID_COUNT] = {
   [2] = {.index = 2, .length = 1},
   [3] = {.index = 3, .length = 1},
   [4] = {.index = 4, .length = 1},
-  [5] = {.index = 5, .length = 3},
-  [6] = {.index = 8, .length = 2},
-  [7] = {.index = 10, .length = 2},
-  [8] = {.index = 12, .length = 2},
-  [9] = {.index = 14, .length = 3},
-  [10] = {.index = 17, .length = 2},
+  [5] = {.index = 5, .length = 1},
+  [6] = {.index = 6, .length = 3},
+  [7] = {.index = 9, .length = 2},
+  [8] = {.index = 11, .length = 2},
+  [9] = {.index = 13, .length = 2},
+  [10] = {.index = 15, .length = 3},
+  [11] = {.index = 18, .length = 2},
 };
 
 static const TSFieldMapEntry ts_field_map_entries[] = {
@@ -345,25 +348,27 @@ static const TSFieldMapEntry ts_field_map_entries[] = {
   [3] =
     {field_unit, 0},
   [4] =
-    {field_function, 0},
+    {field_expression, 1},
   [5] =
+    {field_function, 0},
+  [6] =
     {field_left, 0},
     {field_operator, 1},
     {field_right, 2},
-  [8] =
+  [9] =
     {field_first, 0},
     {field_multiplicative, 1},
-  [10] =
+  [11] =
     {field_divisive, 1},
     {field_first, 0},
-  [12] =
+  [13] =
     {field_args, 2},
     {field_function, 0},
-  [14] =
+  [15] =
     {field_divisive, 2},
     {field_first, 0},
     {field_multiplicative, 1},
-  [17] =
+  [18] =
     {field_exponent, 2},
     {field_unit, 0},
 };
@@ -696,7 +701,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   [1] = {
     [sym_expression] = STATE(61),
     [sym__sub_expression] = STATE(44),
-    [sym__parenthesized_expression] = STATE(44),
+    [sym_parenthesized_expression] = STATE(44),
     [sym_variable] = STATE(44),
     [sym__scalar] = STATE(44),
     [sym__number] = STATE(44),
@@ -733,7 +738,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_args,
     STATE(41), 9,
       sym__sub_expression,
-      sym__parenthesized_expression,
+      sym_parenthesized_expression,
       sym_variable,
       sym__scalar,
       sym__number,
@@ -756,7 +761,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_float,
     STATE(42), 9,
       sym__sub_expression,
-      sym__parenthesized_expression,
+      sym_parenthesized_expression,
       sym_variable,
       sym__scalar,
       sym__number,
@@ -779,7 +784,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_float,
     STATE(47), 9,
       sym__sub_expression,
-      sym__parenthesized_expression,
+      sym_parenthesized_expression,
       sym_variable,
       sym__scalar,
       sym__number,
@@ -802,7 +807,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_float,
     STATE(36), 9,
       sym__sub_expression,
-      sym__parenthesized_expression,
+      sym_parenthesized_expression,
       sym_variable,
       sym__scalar,
       sym__number,
@@ -825,7 +830,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_float,
     STATE(43), 9,
       sym__sub_expression,
-      sym__parenthesized_expression,
+      sym_parenthesized_expression,
       sym_variable,
       sym__scalar,
       sym__number,
@@ -1503,7 +1508,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [9] = {.entry = {.count = 1, .reusable = true}}, SHIFT(12),
   [11] = {.entry = {.count = 1, .reusable = true}}, SHIFT(51),
   [13] = {.entry = {.count = 1, .reusable = true}}, SHIFT(40),
-  [15] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_units, 2, 0, 6),
+  [15] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_units, 2, 0, 7),
   [17] = {.entry = {.count = 1, .reusable = true}}, SHIFT(45),
   [19] = {.entry = {.count = 1, .reusable = true}}, SHIFT(46),
   [21] = {.entry = {.count = 1, .reusable = true}}, SHIFT(15),
@@ -1542,18 +1547,18 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [89] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_variable_repeat1, 2, 0, 0), SHIFT_REPEAT(54),
   [92] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_variable, 2, 0, 0),
   [94] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_float, 6, 0, 0),
-  [96] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_unit_term, 3, 0, 10),
+  [96] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_unit_term, 3, 0, 11),
   [98] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_float, 5, 0, 0),
   [100] = {.entry = {.count = 1, .reusable = true}}, REDUCE(aux_sym__units_div_part, 2, 0, 0),
   [102] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym__units_div_part, 2, 0, 0), SHIFT_REPEAT(46),
-  [105] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_units, 3, 0, 9),
-  [107] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_units, 2, 0, 7),
-  [109] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_binary_operator, 3, 0, 5),
+  [105] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_units, 3, 0, 10),
+  [107] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_units, 2, 0, 8),
+  [109] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_binary_operator, 3, 0, 6),
   [111] = {.entry = {.count = 1, .reusable = true}}, SHIFT(3),
-  [113] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_call, 4, 0, 8),
-  [115] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym__parenthesized_expression, 3, 0, 0),
+  [113] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_call, 4, 0, 9),
+  [115] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_parenthesized_expression, 3, 0, 4),
   [117] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_quantity, 2, 0, 1),
-  [119] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_call, 3, 0, 4),
+  [119] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_call, 3, 0, 5),
   [121] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_args, 1, 0, 0),
   [123] = {.entry = {.count = 1, .reusable = true}}, SHIFT(6),
   [125] = {.entry = {.count = 1, .reusable = true}}, SHIFT(5),

@@ -83,8 +83,16 @@ def build_subexpression(node: Node) -> Expression:
             return build_call(node)
         case Node(type="binary_operator"):
             return build_binary_operator(node)
+        case Node(type="parenthesized_expression"):
+            return build_parenthesized_expression(node)
         case _:
             raise AssertionError(f"Unexpected node type: {node.type}")
+
+
+def build_parenthesized_expression(node: Node) -> Expression:
+    assert node.type == "parenthesized_expression"
+    expression = get_child_by_field_name(node, "expression")
+    return build_subexpression(expression)
 
 
 def build_variable(node: Node) -> Variable:

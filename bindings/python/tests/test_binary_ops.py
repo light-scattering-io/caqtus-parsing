@@ -64,6 +64,26 @@ def test_arithmetic_priority():
     )
 
 
+def test_parentheses():
+    s = "(1 + 2) * 3"
+    result = parse(s)
+    assert result == Multiply(left=Add(left=1, right=2), right=3)
+
+    s = "1 * (2 + 3)"
+    result = parse(s)
+    assert result == Multiply(left=1, right=Add(left=2, right=3))
+
+    s = "(1 + 2) * (3 + 4)"
+    result = parse(s)
+    assert result == Multiply(left=Add(left=1, right=2), right=Add(left=3, right=4))
+
+    s = "(1 + 2) * (3 + 4) - 5"
+    result = parse(s)
+    assert result == Subtract(
+        left=Multiply(left=Add(left=1, right=2), right=Add(left=3, right=4)), right=5
+    )
+
+
 def test_multiply_quantity():
     s = "t * 12 MHz"
     result = parse(s)
@@ -71,3 +91,17 @@ def test_multiply_quantity():
     assert result == Multiply(
         left=Variable(("t",)), right=Quantity(12, (UnitTerm("MHz"),))
     )
+
+
+def test_quantity_divide_ambiguity():
+    s = "(12 MHz) / t"
+    result = parse(s)
+
+    assert result == Divide(
+        left=Quantity(12, (UnitTerm("MHz"),)), right=Variable(("t",))
+    )
+
+    s = "12 MHz / t"
+    result = parse(s)
+
+    assert result == Quantity(12, (UnitTerm("MHz"),), (UnitTerm("t"),))

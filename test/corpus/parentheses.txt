@@ -8,11 +8,13 @@ Arithmetic
 
 (expression
   (binary_operator
-    (binary_operator
-      (float)
-      (integer))
-    (variable
-        (NAME))))
+    (parenthesized_expression
+      (binary_operator
+        (float)
+        (integer)))
+        (variable
+          (NAME))))
+
 
 ====
 Call
@@ -24,20 +26,21 @@ Call
 
 (expression
   (binary_operator
-    (binary_operator
-      (call
-        (NAME)
-        (args
-          (variable
-            (NAME))))
-      (integer))
-    (quantity
-      (float)
-      (units
-        (unit_term
-          (unit))
-        (unit_term
-            (unit))))))
+    (parenthesized_expression
+      (binary_operator
+        (call
+          (NAME)
+          (args
+            (variable
+              (NAME))))
+        (integer)))
+        (quantity
+          (float)
+          (units
+            (unit_term
+              (unit))
+            (unit_term
+              (unit))))))
 
 
 

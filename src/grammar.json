@@ -11,7 +11,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_parenthesized_expression"
+          "name": "parenthesized_expression"
         },
         {
           "type": "SYMBOL",
@@ -31,7 +31,7 @@
         }
       ]
     },
-    "_parenthesized_expression": {
+    "parenthesized_expression": {
       "type": "PREC",
       "value": 1,
       "content": {
@@ -42,8 +42,12 @@
             "value": "("
           },
           {
-            "type": "SYMBOL",
-            "name": "_sub_expression"
+            "type": "FIELD",
+            "name": "expression",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_sub_expression"
+            }
           },
           {
             "type": "STRING",

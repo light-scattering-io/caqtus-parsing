@@ -14,7 +14,7 @@ const PREC = {
   plus: 4,
   times: 5,
   power: 6,
-  call: 7,
+  call: 8,
 };
 
 
@@ -95,11 +95,13 @@ module.exports = grammar({
     // It is necessary to disambiguate it like this: (1 MHz) * variable.
     // Maybe one solution to avoid this would be to explicitly define the units
     // available in the grammar?
-    units: $ => prec.right(seq(
-      field("first", $.unit_term),
-      field("multiplicative", optional($._units_mult_part)),
-      field("divisive", optional($._units_div_part)),
-    )),
+    units: $ => prec.right(
+      seq(
+        field("first", $.unit_term),
+        field("multiplicative", optional($._units_mult_part)),
+        field("divisive", optional($._units_div_part)),
+      )
+    ),
 
     _units_mult_part: $ => repeat1(
       seq(optional('*'), $.unit_term)
@@ -109,10 +111,10 @@ module.exports = grammar({
       seq('/', $.unit_term)
     ),
 
-    unit_term: $ => prec.left(
+    unit_term: $ => prec.right(
       seq(
         field("unit", $.unit),
-        optional(seq(choice('^', '**'), field("exponent", $.integer))),
+        optional(seq('**', field("exponent", $.integer))),
       )
     ),
 

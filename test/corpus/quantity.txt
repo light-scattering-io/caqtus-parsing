@@ -55,7 +55,7 @@ Multiplicative and divisive unit
 Unit with power
 ===============
 
-1.5 MHz^-2
+1.5 MHz**-2
 
 ---
 
@@ -101,7 +101,7 @@ Percent
 Spaced multiplicative units
 ===========================
 
-1.0 m s^-1
+1.0 m s**-1
 
 ---
 
@@ -119,19 +119,19 @@ Spaced multiplicative units
 Quantity with variable power
 ============================
 
-1.0 m**var
+(1.0 m) ** var
 
 ---
 
 (expression
   (binary_operator
-    (quantity
-      (float)
-      (units
-        (unit_term
-          (unit))))
+    (parenthesized_expression
+      (quantity
+        (float)
+        (units
+          (unit_term
+            (unit)))))
     (variable
       (NAME))))
-
 
 

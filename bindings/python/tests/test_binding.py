@@ -1,6 +1,6 @@
 import tree_sitter
-import tree_sitter_caqtus
+import caqtus_parsing
 
 
 def test_can_load_grammar():
-    tree_sitter.Language(tree_sitter_caqtus.language())
+    tree_sitter.Language(caqtus_parsing.language())

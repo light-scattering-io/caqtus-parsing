@@ -1,7 +1,7 @@
 import pytest
 
-from tree_sitter_caqtus import parse, InvalidSyntaxError
-from tree_sitter_caqtus.nodes import Variable
+from caqtus_parsing import parse, InvalidSyntaxError
+from caqtus_parsing.nodes import Variable
 
 
 def test_parse_variable():

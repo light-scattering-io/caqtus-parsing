@@ -1,5 +1,5 @@
-from tree_sitter_caqtus import parse
-from tree_sitter_caqtus.nodes import Quantity, Unit
+from caqtus_parsing import parse
+from caqtus_parsing.nodes import Quantity, Unit
 
 
 def test_quantity():

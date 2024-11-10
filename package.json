@@ -1,5 +1,5 @@
 {
-  "name": "tree-sitter-caqtus",
+  "name": "caqtus-parsing",
   "version": "0.1.0",
   "description": "Used to parse expressions for the caqtus framework",
   "repository": "github:tree-sitter/tree-sitter-caqtus",

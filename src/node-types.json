@@ -323,7 +323,7 @@
     "type": "unary_operator",
     "named": true,
     "fields": {
-      "argument": {
+      "operand": {
         "multiple": false,
         "required": true,
         "types": [

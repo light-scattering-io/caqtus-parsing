@@ -148,7 +148,7 @@ module.exports = grammar({
 
     unary_operator: $ => prec(PREC.unary, seq(
         field('operator', $.sign),
-        field('argument', $._sub_expression),
+        field('operand', $._sub_expression),
       )
     ),
 
@@ -160,8 +160,6 @@ module.exports = grammar({
     _DOT: _ => token('.'),
     NAME: _ => token(/[a-zA-Z][a-zA-Z0-9_]*/),
     _DIGITS: _ => token(repeat1(/[0-9]+_?/)),
-    // The token for the sign of a number needs to take precedence over the
-    // unary plus and minus operators.
     PLUS: _ => token('+'),
     MINUS: _ => token('-'),
     TIMES: _ => token('*'),

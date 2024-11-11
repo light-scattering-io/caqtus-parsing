@@ -315,15 +315,15 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
 
 enum ts_field_identifiers {
   field_args = 1,
-  field_argument = 2,
-  field_divisive = 3,
-  field_exponent = 4,
-  field_expression = 5,
-  field_first = 6,
-  field_function = 7,
-  field_left = 8,
-  field_magnitude = 9,
-  field_multiplicative = 10,
+  field_divisive = 2,
+  field_exponent = 3,
+  field_expression = 4,
+  field_first = 5,
+  field_function = 6,
+  field_left = 7,
+  field_magnitude = 8,
+  field_multiplicative = 9,
+  field_operand = 10,
   field_operator = 11,
   field_right = 12,
   field_unit = 13,
@@ -333,7 +333,6 @@ enum ts_field_identifiers {
 static const char * const ts_field_names[] = {
   [0] = NULL,
   [field_args] = "args",
-  [field_argument] = "argument",
   [field_divisive] = "divisive",
   [field_exponent] = "exponent",
   [field_expression] = "expression",
@@ -342,6 +341,7 @@ static const char * const ts_field_names[] = {
   [field_left] = "left",
   [field_magnitude] = "magnitude",
   [field_multiplicative] = "multiplicative",
+  [field_operand] = "operand",
   [field_operator] = "operator",
   [field_right] = "right",
   [field_unit] = "unit",
@@ -372,7 +372,7 @@ static const TSFieldMapEntry ts_field_map_entries[] = {
   [3] =
     {field_unit, 0},
   [4] =
-    {field_argument, 1},
+    {field_operand, 1},
     {field_operator, 0},
   [6] =
     {field_function, 0},

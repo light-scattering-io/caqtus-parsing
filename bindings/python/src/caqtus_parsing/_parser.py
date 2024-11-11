@@ -13,6 +13,8 @@ from .nodes import (
     Multiply,
     Divide,
     Power,
+    UnaryOperator,
+    Plus, Minus
 )
 
 CAQTUS_LANGUAGE = Language(language())
@@ -25,6 +27,11 @@ BINARY_OPERATOR_CLASSES = {
     "TIMES": Multiply,
     "DIVIDE": Divide,
     "POWER": Power,
+}
+
+UNARY_OPERATOR_CLASSES = {
+    "PLUS": Plus,
+    "MINUS": Minus
 }
 
 
@@ -86,6 +93,8 @@ def build_subexpression(node: Node) -> Expression:
             return build_call(node)
         case Node(type="binary_operator"):
             return build_binary_operator(node)
+        case Node(type="unary_operator"):
+            return build_unary_operator(node)
         case Node(type="parenthesized_expression"):
             return build_parenthesized_expression(node)
         case _:
@@ -197,6 +206,19 @@ def build_binary_operator(node: Node) -> BinaryOperator:
 
     assert operator in BINARY_OPERATOR_CLASSES
     return BINARY_OPERATOR_CLASSES[operator](left, right)
+
+def build_unary_operator(node: Node) -> UnaryOperator:
+    assert node.type == "unary_operator"
+    operator_node = node.child_by_field_name("operator")
+    assert operator_node is not None
+    operator = operator_node.type
+
+    operand_node = node.child_by_field_name("operand")
+    assert operand_node is not None
+    operand = build_subexpression(operand_node)
+
+    assert operator in UNARY_OPERATOR_CLASSES
+    return UNARY_OPERATOR_CLASSES[operator](operand)
 
 
 def get_child_by_field_name(node: Node, field_name: str) -> Node:

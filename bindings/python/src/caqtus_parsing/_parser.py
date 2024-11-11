@@ -103,11 +103,9 @@ def build_variable(node: Node) -> Variable:
 
     names = []
 
-    # We skip the dots in the children list by jumping by 2
-    for child in node.children:
-        if child.type != ".":
-            assert child.text
-            names.append(child.text.decode("utf-8"))
+    for child in node.named_children:
+        assert child.text
+        names.append(child.text.decode("utf-8"))
 
     return Variable(tuple(names))
 

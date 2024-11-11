@@ -34,6 +34,18 @@ UNARY_OPERATOR_CLASSES = {"PLUS": Plus, "MINUS": Minus}
 
 
 def parse(code: str) -> Expression:
+    """Compute a syntax tree for the given expression.
+
+    Args:
+        code: The expression to parse.
+
+    Returns:
+        An object representing the parsed expression.
+
+    Raises:
+        InvalidSyntaxError: If the expression is not correctly written.
+    """
+
     tree = parser.parse(bytes(code, "utf-8"))
 
     root_node = tree.root_node

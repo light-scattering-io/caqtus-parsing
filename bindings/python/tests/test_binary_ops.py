@@ -115,32 +115,32 @@ def test_power():
     s = "t ** 2"
     result = parse(s)
 
-    assert result == Power(base=Variable(("t",)), exponent=2)
+    assert result == Power(Variable(("t",)), 2)
 
 
 def test_power_add_priority():
     s = "t ** 2 + 1"
     result = parse(s)
 
-    assert result == Add(left=Power(base=Variable(("t",)), exponent=2), right=1)
+    assert result == Add(left=Power(Variable(("t",)), 2), right=1)
 
     s = "t ** (2 + 1)"
     result = parse(s)
 
-    assert result == Power(base=Variable(("t",)), exponent=Add(left=2, right=1))
+    assert result == Power(Variable(("t",)), Add(left=2, right=1))
 
 
 def test_power_multiplication_priority():
     s = "t ** 2 * 3"
     result = parse(s)
 
-    assert result == Multiply(left=Power(base=Variable(("t",)), exponent=2), right=3)
+    assert result == Multiply(left=Power(Variable(("t",)), 2), right=3)
 
     s = "t ** 2 * (3 + 1)"
     result = parse(s)
 
     assert result == Multiply(
-        left=Power(base=Variable(("t",)), exponent=2), right=Add(left=3, right=1)
+        left=Power(Variable(("t",)), 2), right=Add(left=3, right=1)
     )
 
 
@@ -148,9 +148,7 @@ def test_quantity_power():
     s = "(1.0 m)**variable"
     result = parse(s)
 
-    assert result == Power(
-        base=Quantity(1.0, (UnitTerm("m"),)), exponent=Variable(("variable",))
-    )
+    assert result == Power(Quantity(1.0, (UnitTerm("m"),)), Variable(("variable",)))
 
     s = "1.0 m ** variable"
     # Could maybe be Power(Quantity(1.0, (UnitTerm("m"),)), Variable(("variable",))),
@@ -164,13 +162,11 @@ def test_call_power():
     result = parse(s)
 
     assert result == Power(
-        base=Call(function="f", args=(Quantity(1.0, (UnitTerm("m"),)),)),
-        exponent=Variable(("variable",)),
+        Call(function="f", args=(Quantity(1.0, (UnitTerm("m"),)),)),
+        Variable(("variable",)),
     )
 
     s = "5 ** f(a.b)"
     result = parse(s)
 
-    assert result == Power(
-        base=5, exponent=Call(function="f", args=(Variable(("a", "b")),))
-    )
+    assert result == Power(5, Call(function="f", args=(Variable(("a", "b")),)))

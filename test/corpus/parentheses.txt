@@ -11,9 +11,11 @@ Arithmetic
     (parenthesized_expression
       (binary_operator
         (float)
+        (PLUS)
         (integer)))
-        (variable
-          (NAME))))
+    (TIMES)
+    (variable
+      (NAME))))
 
 
 ====
@@ -33,14 +35,17 @@ Call
           (args
             (variable
               (NAME))))
+        (PLUS)
         (integer)))
-        (quantity
-          (float)
-          (units
-            (unit_term
-              (unit))
-            (unit_term
-              (unit))))))
+    (TIMES)
+    (quantity
+      (float)
+      (units
+        (unit_term
+          (unit))
+        (DIVIDE)
+        (unit_term
+          (unit))))))
 
 
 

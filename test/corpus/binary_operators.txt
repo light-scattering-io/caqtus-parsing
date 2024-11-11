@@ -9,6 +9,7 @@ Addition
 (expression
   (binary_operator
     (integer)
+    (PLUS)
     (integer)))
 
 ==============
@@ -22,6 +23,7 @@ Multiplication
 (expression
   (binary_operator
     (integer)
+    (TIMES)
     (float)))
 
 
@@ -40,12 +42,15 @@ Quantity multiplication
       (units
         (unit_term
           (unit))
+        (TIMES)
         (unit_term
           (unit))
+        (DIVIDE)
         (unit_term
           (unit))))
+    (TIMES)
     (variable
-        (NAME))))
+      (NAME))))
 
 ===========================
 Addition and Multiplication
@@ -58,8 +63,10 @@ Addition and Multiplication
 (expression
   (binary_operator
     (integer)
+    (PLUS)
     (binary_operator
       (float)
+      (TIMES)
       (quantity
         (float)
         (units

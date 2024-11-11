@@ -81,24 +81,24 @@
         "required": true,
         "types": [
           {
-            "type": "*",
-            "named": false
+            "type": "DIVIDE",
+            "named": true
           },
           {
-            "type": "**",
-            "named": false
+            "type": "MINUS",
+            "named": true
           },
           {
-            "type": "+",
-            "named": false
+            "type": "PLUS",
+            "named": true
           },
           {
-            "type": "-",
-            "named": false
+            "type": "POWER",
+            "named": true
           },
           {
-            "type": "/",
-            "named": false
+            "type": "TIMES",
+            "named": true
           }
         ]
       },
@@ -309,6 +309,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "POWER",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -320,8 +330,8 @@
         "required": false,
         "types": [
           {
-            "type": "/",
-            "named": false
+            "type": "DIVIDE",
+            "named": true
           },
           {
             "type": "unit_term",
@@ -344,8 +354,8 @@
         "required": false,
         "types": [
           {
-            "type": "*",
-            "named": false
+            "type": "TIMES",
+            "named": true
           },
           {
             "type": "unit_term",
@@ -383,23 +393,7 @@
     "named": false
   },
   {
-    "type": "*",
-    "named": false
-  },
-  {
-    "type": "**",
-    "named": false
-  },
-  {
-    "type": "+",
-    "named": false
-  },
-  {
     "type": ",",
-    "named": false
-  },
-  {
-    "type": "-",
     "named": false
   },
   {
@@ -407,11 +401,27 @@
     "named": false
   },
   {
-    "type": "/",
-    "named": false
+    "type": "DIVIDE",
+    "named": true
+  },
+  {
+    "type": "MINUS",
+    "named": true
   },
   {
     "type": "NAME",
+    "named": true
+  },
+  {
+    "type": "PLUS",
+    "named": true
+  },
+  {
+    "type": "POWER",
+    "named": true
+  },
+  {
+    "type": "TIMES",
     "named": true
   },
   {

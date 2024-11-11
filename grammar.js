@@ -104,17 +104,17 @@ module.exports = grammar({
     ),
 
     _units_mult_part: $ => repeat1(
-      seq(optional('*'), $.unit_term)
+      seq(optional($.TIMES), $.unit_term)
     ),
 
     _units_div_part: $ => repeat1(
-      seq('/', $.unit_term)
+      seq($.DIVIDE, $.unit_term)
     ),
 
     unit_term: $ => prec.right(
       seq(
         field("unit", $.unit),
-        optional(seq('**', field("exponent", $.integer))),
+        optional(seq($.POWER, field("exponent", $.integer))),
       )
     ),
 
@@ -136,11 +136,11 @@ module.exports = grammar({
 
     binary_operator: $ => {
       const table = [
-        [prec.left, '+', PREC.plus],
-        [prec.left, '-', PREC.plus],
-        [prec.left, '*', PREC.times],
-        [prec.left, '/', PREC.times],
-        [prec.right, '**', PREC.power],
+        [prec.left, $.PLUS, PREC.plus],
+        [prec.left, $.MINUS, PREC.plus],
+        [prec.left, $.TIMES, PREC.times],
+        [prec.left, $.DIVIDE, PREC.times],
+        [prec.right, $.POWER, PREC.power],
       ];
 
       return choice(...table.map(([fn, operator, precedence]) => fn(precedence, seq(
@@ -149,5 +149,12 @@ module.exports = grammar({
         field('right', $._sub_expression),
       ))));
     },
+
+    // tokens
+    PLUS: _ => token('+'),
+    MINUS: _ => token('-'),
+    TIMES: _ => token('*'),
+    DIVIDE: _ => token('/'),
+    POWER: _ => token('**'),
   }
 });

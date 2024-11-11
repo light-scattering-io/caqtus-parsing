@@ -390,8 +390,8 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "STRING",
-                "value": "*"
+                "type": "SYMBOL",
+                "name": "TIMES"
               },
               {
                 "type": "BLANK"
@@ -411,8 +411,8 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "STRING",
-            "value": "/"
+            "type": "SYMBOL",
+            "name": "DIVIDE"
           },
           {
             "type": "SYMBOL",
@@ -442,8 +442,8 @@
                 "type": "SEQ",
                 "members": [
                   {
-                    "type": "STRING",
-                    "value": "**"
+                    "type": "SYMBOL",
+                    "name": "POWER"
                   },
                   {
                     "type": "FIELD",
@@ -567,8 +567,8 @@
                 "type": "FIELD",
                 "name": "operator",
                 "content": {
-                  "type": "STRING",
-                  "value": "+"
+                  "type": "SYMBOL",
+                  "name": "PLUS"
                 }
               },
               {
@@ -600,8 +600,8 @@
                 "type": "FIELD",
                 "name": "operator",
                 "content": {
-                  "type": "STRING",
-                  "value": "-"
+                  "type": "SYMBOL",
+                  "name": "MINUS"
                 }
               },
               {
@@ -633,8 +633,8 @@
                 "type": "FIELD",
                 "name": "operator",
                 "content": {
-                  "type": "STRING",
-                  "value": "*"
+                  "type": "SYMBOL",
+                  "name": "TIMES"
                 }
               },
               {
@@ -666,8 +666,8 @@
                 "type": "FIELD",
                 "name": "operator",
                 "content": {
-                  "type": "STRING",
-                  "value": "/"
+                  "type": "SYMBOL",
+                  "name": "DIVIDE"
                 }
               },
               {
@@ -699,8 +699,8 @@
                 "type": "FIELD",
                 "name": "operator",
                 "content": {
-                  "type": "STRING",
-                  "value": "**"
+                  "type": "SYMBOL",
+                  "name": "POWER"
                 }
               },
               {
@@ -715,6 +715,41 @@
           }
         }
       ]
+    },
+    "PLUS": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "+"
+      }
+    },
+    "MINUS": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "-"
+      }
+    },
+    "TIMES": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "*"
+      }
+    },
+    "DIVIDE": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "/"
+      }
+    },
+    "POWER": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "**"
+      }
     }
   },
   "extras": [

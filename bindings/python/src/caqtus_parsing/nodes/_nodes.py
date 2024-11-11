@@ -5,7 +5,8 @@ import attrs
 type Number = int | float
 type Scalar = Number | Quantity
 type BinaryOperator = Add | Subtract | Multiply | Divide | Power
-type Expression = Variable | Scalar | Call | BinaryOperator
+type UnaryOperator = Plus | Minus
+type Expression = Variable | Scalar | Call | BinaryOperator | UnaryOperator
 
 
 @attrs.frozen
@@ -148,3 +149,25 @@ class Power:
         """Alias for the right operand."""
 
         return self.right
+
+
+@attrs.frozen
+class Plus:
+    """Represents a unary plus operation in an expression.
+
+    Attributes:
+        operand: The operand.
+    """
+
+    operand: Expression
+
+
+@attrs.frozen
+class Minus:
+    """Represents a unary minus operation in an expression.
+
+    Attributes:
+        operand: The operand.
+    """
+
+    operand: Expression

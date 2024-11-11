@@ -12,6 +12,9 @@ from ._nodes import (
     Multiply,
     Divide,
     Power,
+    UnaryOperator,
+    Plus,
+    Minus,
 )
 
 __all__ = [
@@ -26,4 +29,7 @@ __all__ = [
     "Multiply",
     "Divide",
     "Power",
+    "UnaryOperator",
+    "Plus",
+    "Minus",
 ]

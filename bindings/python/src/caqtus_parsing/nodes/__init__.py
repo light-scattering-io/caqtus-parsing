@@ -1,6 +1,8 @@
 """Contains the AST nodes for the caqtus_parsing module."""
 
 from ._nodes import (
+    Scalar,
+    Number,
     Variable,
     Expression,
     Quantity,
@@ -18,6 +20,8 @@ from ._nodes import (
 )
 
 __all__ = [
+    "Scalar",
+    "Number",
     "Variable",
     "Expression",
     "Quantity",

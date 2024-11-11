@@ -33,9 +33,9 @@ module.exports = grammar({
 
     parenthesized_expression: $ => prec(PREC.parenthesized_expression,
       seq(
-        '(',
+        $._LPAREN,
         field('expression', $._sub_expression),
-        ')',
+        $._RPAREN,
       )
     ),
 
@@ -124,9 +124,9 @@ module.exports = grammar({
 
     call: $ => prec(PREC.call, seq(
       field('function', $.NAME),
-      '(',
+      $._LPAREN,
       field('args', optional($.args)),
-      ')',
+      $._RPAREN,
     )),
 
     args: $ => seq(
@@ -151,6 +151,8 @@ module.exports = grammar({
     },
 
     // tokens
+    _LPAREN: _ => token('('),
+    _RPAREN: _ => token(')'),
     PLUS: _ => token('+'),
     MINUS: _ => token('-'),
     TIMES: _ => token('*'),

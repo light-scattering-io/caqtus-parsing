@@ -38,8 +38,8 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "STRING",
-            "value": "("
+            "type": "SYMBOL",
+            "name": "_LPAREN"
           },
           {
             "type": "FIELD",
@@ -50,8 +50,8 @@
             }
           },
           {
-            "type": "STRING",
-            "value": ")"
+            "type": "SYMBOL",
+            "name": "_RPAREN"
           }
         ]
       }
@@ -495,8 +495,8 @@
             }
           },
           {
-            "type": "STRING",
-            "value": "("
+            "type": "SYMBOL",
+            "name": "_LPAREN"
           },
           {
             "type": "FIELD",
@@ -515,8 +515,8 @@
             }
           },
           {
-            "type": "STRING",
-            "value": ")"
+            "type": "SYMBOL",
+            "name": "_RPAREN"
           }
         ]
       }
@@ -715,6 +715,20 @@
           }
         }
       ]
+    },
+    "_LPAREN": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "("
+      }
+    },
+    "_RPAREN": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": ")"
+      }
     },
     "PLUS": {
       "type": "TOKEN",

@@ -45,7 +45,6 @@ module.exports = grammar({
       repeat(seq($._DOT, $.NAME)),
     ),
 
-    _DOT: _ => token('.'),
 
     NAME: _ => token(/[a-zA-Z][a-zA-Z0-9_]*/),
 
@@ -70,8 +69,8 @@ module.exports = grammar({
       return prec(PREC.float, seq(
           optional($._SIGN),
           choice(
-            seq($._DIGITS, '.', optional($._DIGITS), optional(exponent)),
-            seq(optional($._DIGITS), '.', $._DIGITS, optional(exponent)),
+            seq($._DIGITS, $._DOT, optional($._DIGITS), optional(exponent)),
+            seq(optional($._DIGITS), $._DOT, $._DIGITS, optional(exponent)),
             seq($._DIGITS, optional(exponent)),
           ),
         )
@@ -153,6 +152,7 @@ module.exports = grammar({
     // tokens
     _LPAREN: _ => token('('),
     _RPAREN: _ => token(')'),
+    _DOT: _ => token('.'),
     PLUS: _ => token('+'),
     MINUS: _ => token('-'),
     TIMES: _ => token('*'),

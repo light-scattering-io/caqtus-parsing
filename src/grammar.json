@@ -81,13 +81,6 @@
         }
       ]
     },
-    "_DOT": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "."
-      }
-    },
     "NAME": {
       "type": "TOKEN",
       "content": {
@@ -175,8 +168,8 @@
                     "name": "_DIGITS"
                   },
                   {
-                    "type": "STRING",
-                    "value": "."
+                    "type": "SYMBOL",
+                    "name": "_DOT"
                   },
                   {
                     "type": "CHOICE",
@@ -229,8 +222,8 @@
                     ]
                   },
                   {
-                    "type": "STRING",
-                    "value": "."
+                    "type": "SYMBOL",
+                    "name": "_DOT"
                   },
                   {
                     "type": "SYMBOL",
@@ -728,6 +721,13 @@
       "content": {
         "type": "STRING",
         "value": ")"
+      }
+    },
+    "_DOT": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "."
       }
     },
     "PLUS": {

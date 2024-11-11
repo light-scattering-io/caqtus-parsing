@@ -72,6 +72,7 @@ class Call:
     function: str
     args: tuple[Expression, ...] = ()
 
+
 @attrs.frozen
 class Add:
     """Represents an addition operation in an expression.
@@ -83,6 +84,7 @@ class Add:
 
     left: Expression
     right: Expression
+
 
 @attrs.frozen
 class Subtract:
@@ -96,6 +98,7 @@ class Subtract:
     left: Expression
     right: Expression
 
+
 @attrs.frozen
 class Multiply:
     """Represents a multiplication operation in an expression.
@@ -107,6 +110,7 @@ class Multiply:
 
     left: Expression
     right: Expression
+
 
 @attrs.frozen
 class Divide:
@@ -120,14 +124,27 @@ class Divide:
     left: Expression
     right: Expression
 
+
 @attrs.frozen
 class Power:
     """Represents a power operation in an expression.
 
     Attributes:
-        base: The base operand.
-        exponent: The exponent operand.
+        left: The base.
+        right: The exponent.
     """
 
-    base: Expression
-    exponent: Expression
+    left: Expression
+    right: Expression
+
+    @property
+    def base(self) -> Expression:
+        """Alias for the left operand."""
+
+        return self.left
+
+    @property
+    def exponent(self) -> Expression:
+        """Alias for the right operand."""
+
+        return self.right

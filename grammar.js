@@ -55,7 +55,7 @@ module.exports = grammar({
     ),
 
     integer: $ => prec(PREC.integer, seq(
-      optional($._SIGN),
+      optional($._NUMBER_SIGN),
       $._DIGITS,
     )),
 
@@ -63,7 +63,7 @@ module.exports = grammar({
       const exponent = seq(/[eE][+-]?/, $._DIGITS);
 
       return prec(PREC.float, seq(
-          optional($._SIGN),
+          optional($._NUMBER_SIGN),
           choice(
             seq($._DIGITS, $._DOT, optional($._DIGITS), optional(exponent)),
             seq(optional($._DIGITS), $._DOT, $._DIGITS, optional(exponent)),
@@ -72,8 +72,6 @@ module.exports = grammar({
         )
       );
     },
-
-    _SIGN: _ => token(/[-+]/),
 
     quantity: $ => seq(
       field("magnitude", $.float),
@@ -149,6 +147,7 @@ module.exports = grammar({
     _DOT: _ => token('.'),
     NAME: _ => token(/[a-zA-Z][a-zA-Z0-9_]*/),
     _DIGITS: _ => token(repeat1(/[0-9]+_?/)),
+    _NUMBER_SIGN: _ => token(choice('+', '-')),
     PLUS: _ => token('+'),
     MINUS: _ => token('-'),
     TIMES: _ => token('*'),

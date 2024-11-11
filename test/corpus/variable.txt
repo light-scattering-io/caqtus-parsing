@@ -60,8 +60,11 @@ Invalid name
 ---
 
 (expression
-  (ERROR)
-  (variable
-    (NAME)))
+  (quantity
+    (float
+      (MISSING _DIGITS))
+    (units
+      (unit_term
+        (unit)))))
 
 

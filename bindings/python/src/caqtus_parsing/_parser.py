@@ -32,10 +32,8 @@ def parse(code: str) -> Expression:
     tree = parser.parse(bytes(code, "utf-8"))
 
     root_node = tree.root_node
-    assert root_node.type == "expression"
-    assert root_node.text
 
-    if root_node.has_error:
+    if root_node.type in ("ERROR", "MISSING") or root_node.has_error:
         error_node = find_first_error(root_node)
         assert error_node is not None
         raise InvalidSyntaxError(
@@ -49,6 +47,9 @@ def parse(code: str) -> Expression:
                 error_node.byte_range[1] + 1,
             ),
         )
+
+    assert root_node.type == "expression", root_node.type
+    assert root_node.text
 
     return build_expression(tree.root_node)
 
@@ -187,7 +188,6 @@ def build_binary_operator(node: Node) -> BinaryOperator:
     operator_node = node.child_by_field_name("operator")
     assert operator_node is not None
     operator = operator_node.type
-
 
     left_node = node.child_by_field_name("left")
     assert left_node is not None

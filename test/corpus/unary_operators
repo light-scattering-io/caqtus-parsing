@@ -12,3 +12,91 @@ Minus
       (MINUS))
     (parenthesized_expression
       (integer))))
+
+
+====================
+Add negative integer
+====================
+
+1 + -2
+
+---
+
+(expression
+  (binary_operator
+    (integer)
+    (PLUS)
+    (integer)))
+
+=================
+Add minus integer
+=================
+
+1 + -(2)
+
+---
+
+(expression
+  (binary_operator
+    (integer)
+    (PLUS)
+    (unary_operator
+      (sign
+        (MINUS))
+      (parenthesized_expression
+        (integer)))))
+
+==============
+Plus value add
+==============
+
++var + 1 MHz
+
+---
+
+(expression
+  (binary_operator
+    (unary_operator
+      (sign
+        (PLUS))
+      (variable
+        (NAME)))
+    (PLUS)
+    (quantity
+      (float)
+      (units
+        (unit_term
+          (unit))))))
+
+======================
+Minus negative integer
+======================
+
+--2
+
+---
+
+(expression
+  (unary_operator
+    (sign
+      (MINUS))
+    (integer)))
+
+======================
+Unary power precedence
+======================
+
+-var**2
+
+---
+
+(expression
+  (unary_operator
+    (sign
+      (MINUS))
+    (binary_operator
+      (variable
+        (NAME))
+      (POWER)
+      (integer))))
+

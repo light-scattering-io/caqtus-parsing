@@ -100,3 +100,38 @@ Unary power precedence
       (POWER)
       (integer))))
 
+
+=================
+Negative quantity
+=================
+
+-1 MHz
+
+---
+
+(expression
+  (quantity
+    (float)
+    (units
+      (unit_term
+        (unit)))))
+
+==============
+Minus quantity
+==============
+
+-(1 MHz)
+
+---
+
+(expression
+  (unary_operator
+    (sign
+      (MINUS))
+    (parenthesized_expression
+      (quantity
+        (float)
+        (units
+          (unit_term
+            (unit)))))))
+

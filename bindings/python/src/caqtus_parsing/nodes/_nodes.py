@@ -22,6 +22,10 @@ class Variable:
 
     names: tuple[str, ...]
 
+    @property
+    def name(self) -> str:
+        return ".".join(self.names)
+
 
 @attrs.frozen
 class Quantity:

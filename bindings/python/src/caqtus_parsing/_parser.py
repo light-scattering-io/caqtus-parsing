@@ -20,11 +20,11 @@ CAQTUS_LANGUAGE = Language(language())
 parser = Parser(CAQTUS_LANGUAGE)
 
 BINARY_OPERATOR_CLASSES = {
-    "+": Add,
-    "-": Subtract,
-    "*": Multiply,
-    "/": Divide,
-    "**": Power,
+    "PLUS": Add,
+    "MINUS": Subtract,
+    "TIMES": Multiply,
+    "DIVIDE": Divide,
+    "POWER": Power,
 }
 
 
@@ -129,13 +129,13 @@ def build_quantity(node: Node) -> Quantity:
     ]
 
     for multiplicative_node in unit_node.children_by_field_name("multiplicative"):
-        if multiplicative_node.type != "*":
+        if multiplicative_node.type != "TIMES":
             multiplicative_units.append(build_unit_term(multiplicative_node))
 
     divisional_units = [
         build_unit_term(divisional_node)
         for divisional_node in unit_node.children_by_field_name("divisive")
-        if divisional_node.type != "/"
+        if divisional_node.type != "DIVIDE"
     ]
 
     return Quantity(magnitude, tuple(multiplicative_units), tuple(divisional_units))
@@ -186,10 +186,8 @@ def build_binary_operator(node: Node) -> BinaryOperator:
 
     operator_node = node.child_by_field_name("operator")
     assert operator_node is not None
-    assert operator_node.text
-    operator = operator_node.text.decode("utf-8")
+    operator = operator_node.type
 
-    assert operator in ("+", "-", "*", "/", "**")
 
     left_node = node.child_by_field_name("left")
     assert left_node is not None
@@ -199,6 +197,7 @@ def build_binary_operator(node: Node) -> BinaryOperator:
     assert right_node is not None
     right = build_subexpression(right_node)
 
+    assert operator in BINARY_OPERATOR_CLASSES
     return BINARY_OPERATOR_CLASSES[operator](left, right)
 
 

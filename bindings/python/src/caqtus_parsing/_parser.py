@@ -217,7 +217,7 @@ def build_unary_operator(node: Node) -> UnaryOperator:
     assert operand_node is not None
     operand = build_subexpression(operand_node)
 
-    assert operator in UNARY_OPERATOR_CLASSES
+    assert operator in UNARY_OPERATOR_CLASSES, operator
     return UNARY_OPERATOR_CLASSES[operator](operand)
 
 

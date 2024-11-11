@@ -301,25 +301,6 @@
     }
   },
   {
-    "type": "sign",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "MINUS",
-          "named": true
-        },
-        {
-          "type": "PLUS",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "unary_operator",
     "named": true,
     "fields": {
@@ -366,7 +347,11 @@
         "required": true,
         "types": [
           {
-            "type": "sign",
+            "type": "MINUS",
+            "named": true
+          },
+          {
+            "type": "PLUS",
             "named": true
           }
         ]

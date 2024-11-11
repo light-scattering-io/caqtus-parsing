@@ -728,7 +728,7 @@
             "name": "operator",
             "content": {
               "type": "SYMBOL",
-              "name": "sign"
+              "name": "_sign"
             }
           },
           {
@@ -742,7 +742,7 @@
         ]
       }
     },
-    "sign": {
+    "_sign": {
       "type": "CHOICE",
       "members": [
         {

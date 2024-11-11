@@ -147,12 +147,12 @@ module.exports = grammar({
     },
 
     unary_operator: $ => prec(PREC.unary, seq(
-        field('operator', $.sign),
+        field('operator', $._sign),
         field('operand', $._sub_expression),
       )
     ),
 
-    sign: $ => choice($.PLUS, $.MINUS),
+    _sign: $ => choice($.PLUS, $.MINUS),
 
     // tokens
     _LPAREN: _ => token('('),

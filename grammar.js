@@ -39,14 +39,10 @@ module.exports = grammar({
       )
     ),
 
-
     variable: $ => seq(
       $.NAME,
       repeat(seq($._DOT, $.NAME)),
     ),
-
-
-    NAME: _ => token(/[a-zA-Z][a-zA-Z0-9_]*/),
 
     _scalar: $ => choice(
       $._number,
@@ -76,8 +72,6 @@ module.exports = grammar({
         )
       );
     },
-
-    _DIGITS: _ => token(repeat1(/[0-9]+_?/)),
 
     _SIGN: _ => token(/[-+]/),
 
@@ -153,6 +147,8 @@ module.exports = grammar({
     _LPAREN: _ => token('('),
     _RPAREN: _ => token(')'),
     _DOT: _ => token('.'),
+    NAME: _ => token(/[a-zA-Z][a-zA-Z0-9_]*/),
+    _DIGITS: _ => token(repeat1(/[0-9]+_?/)),
     PLUS: _ => token('+'),
     MINUS: _ => token('-'),
     TIMES: _ => token('*'),

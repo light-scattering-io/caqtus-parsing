@@ -13,7 +13,8 @@ const PREC = {
   integer: 3,
   plus: 4,
   times: 5,
-  power: 6,
+  unary: 6,
+  power: 7,
   call: 8,
 };
 
@@ -29,6 +30,7 @@ module.exports = grammar({
       $._scalar,
       $.call,
       $.binary_operator,
+      $.unary_operator,
     ),
 
     parenthesized_expression: $ => prec(PREC.parenthesized_expression,
@@ -54,16 +56,19 @@ module.exports = grammar({
       $.float,
     ),
 
-    integer: $ => prec(PREC.integer, seq(
-      optional($._NUMBER_SIGN),
-      $._DIGITS,
-    )),
+    integer: $ => prec(PREC.integer,
+      seq(
+        optional(alias(choice($.PLUS, $.MINUS), 'sign')),
+        $._DIGITS,
+      )
+    ),
 
     float: $ => {
       const exponent = seq(/[eE][+-]?/, $._DIGITS);
 
-      return prec(PREC.float, seq(
-          optional($._NUMBER_SIGN),
+      return prec(PREC.float,
+        seq(
+          optional(alias(choice($.PLUS, $.MINUS), 'sign')),
           choice(
             seq($._DIGITS, $._DOT, optional($._DIGITS), optional(exponent)),
             seq(optional($._DIGITS), $._DOT, $._DIGITS, optional(exponent)),
@@ -141,13 +146,22 @@ module.exports = grammar({
       ))));
     },
 
+    unary_operator: $ => prec(PREC.unary, seq(
+        field('operator', $.sign),
+        field('argument', $._sub_expression),
+      )
+    ),
+
+    sign: $ => choice($.PLUS, $.MINUS),
+
     // tokens
     _LPAREN: _ => token('('),
     _RPAREN: _ => token(')'),
     _DOT: _ => token('.'),
     NAME: _ => token(/[a-zA-Z][a-zA-Z0-9_]*/),
     _DIGITS: _ => token(repeat1(/[0-9]+_?/)),
-    _NUMBER_SIGN: _ => token(choice('+', '-')),
+    // The token for the sign of a number needs to take precedence over the
+    // unary plus and minus operators.
     PLUS: _ => token('+'),
     MINUS: _ => token('-'),
     TIMES: _ => token('*'),

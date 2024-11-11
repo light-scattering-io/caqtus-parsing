@@ -1,0 +1,14 @@
+=====
+Minus
+=====
+
+-(5)
+
+---
+
+(expression
+  (unary_operator
+    (sign
+      (MINUS))
+    (parenthesized_expression
+      (integer))))

@@ -32,6 +32,10 @@
           "named": true
         },
         {
+          "type": "unary_operator",
+          "named": true
+        },
+        {
           "type": "variable",
           "named": true
         }
@@ -68,6 +72,10 @@
           },
           {
             "type": "quantity",
+            "named": true
+          },
+          {
+            "type": "unary_operator",
             "named": true
           },
           {
@@ -128,6 +136,10 @@
           },
           {
             "type": "quantity",
+            "named": true
+          },
+          {
+            "type": "unary_operator",
             "named": true
           },
           {
@@ -198,6 +210,10 @@
           "named": true
         },
         {
+          "type": "unary_operator",
+          "named": true
+        },
+        {
           "type": "variable",
           "named": true
         }
@@ -247,6 +263,10 @@
             "named": true
           },
           {
+            "type": "unary_operator",
+            "named": true
+          },
+          {
             "type": "variable",
             "named": true
           }
@@ -274,6 +294,79 @@
         "types": [
           {
             "type": "units",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "sign",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "MINUS",
+          "named": true
+        },
+        {
+          "type": "PLUS",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unary_operator",
+    "named": true,
+    "fields": {
+      "argument": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "binary_operator",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "quantity",
+            "named": true
+          },
+          {
+            "type": "unary_operator",
+            "named": true
+          },
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "sign",
             "named": true
           }
         ]
@@ -423,6 +516,10 @@
   {
     "type": "TIMES",
     "named": true
+  },
+  {
+    "type": "sign",
+    "named": false
   },
   {
     "type": "°",

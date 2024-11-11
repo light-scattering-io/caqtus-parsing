@@ -28,6 +28,10 @@
         {
           "type": "SYMBOL",
           "name": "binary_operator"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unary_operator"
         }
       ]
     },
@@ -117,8 +121,22 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "_NUMBER_SIGN"
+                "type": "ALIAS",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "PLUS"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "MINUS"
+                    }
+                  ]
+                },
+                "named": false,
+                "value": "sign"
               },
               {
                 "type": "BLANK"
@@ -142,8 +160,22 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "_NUMBER_SIGN"
+                "type": "ALIAS",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "PLUS"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "MINUS"
+                    }
+                  ]
+                },
+                "named": false,
+                "value": "sign"
               },
               {
                 "type": "BLANK"
@@ -652,7 +684,7 @@
         },
         {
           "type": "PREC_RIGHT",
-          "value": 6,
+          "value": 7,
           "content": {
             "type": "SEQ",
             "members": [
@@ -682,6 +714,44 @@
               }
             ]
           }
+        }
+      ]
+    },
+    "unary_operator": {
+      "type": "PREC",
+      "value": 6,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "operator",
+            "content": {
+              "type": "SYMBOL",
+              "name": "sign"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "argument",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_sub_expression"
+            }
+          }
+        ]
+      }
+    },
+    "sign": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "PLUS"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "MINUS"
         }
       ]
     },
@@ -721,22 +791,6 @@
           "type": "PATTERN",
           "value": "[0-9]+_?"
         }
-      }
-    },
-    "_NUMBER_SIGN": {
-      "type": "TOKEN",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "+"
-          },
-          {
-            "type": "STRING",
-            "value": "-"
-          }
-        ]
       }
     },
     "PLUS": {

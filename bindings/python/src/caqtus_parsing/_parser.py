@@ -14,7 +14,8 @@ from .nodes import (
     Divide,
     Power,
     UnaryOperator,
-    Plus, Minus
+    Plus,
+    Minus,
 )
 
 CAQTUS_LANGUAGE = Language(language())
@@ -29,16 +30,15 @@ BINARY_OPERATOR_CLASSES = {
     "POWER": Power,
 }
 
-UNARY_OPERATOR_CLASSES = {
-    "PLUS": Plus,
-    "MINUS": Minus
-}
+UNARY_OPERATOR_CLASSES = {"PLUS": Plus, "MINUS": Minus}
 
 
 def parse(code: str) -> Expression:
     tree = parser.parse(bytes(code, "utf-8"))
 
     root_node = tree.root_node
+
+    assert root_node.text is not None
 
     if root_node.type in ("ERROR", "MISSING") or root_node.has_error:
         error_node = find_first_error(root_node)
@@ -56,7 +56,6 @@ def parse(code: str) -> Expression:
         )
 
     assert root_node.type == "expression", root_node.type
-    assert root_node.text
 
     return build_expression(tree.root_node)
 
@@ -206,6 +205,7 @@ def build_binary_operator(node: Node) -> BinaryOperator:
 
     assert operator in BINARY_OPERATOR_CLASSES
     return BINARY_OPERATOR_CLASSES[operator](left, right)
+
 
 def build_unary_operator(node: Node) -> UnaryOperator:
     assert node.type == "unary_operator"

@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "caqtus-parsing"
 description = "Used to parse expressions for the caqtus framework"
-version = "0.3.0"
+version = "0.4.0"
 keywords = ["parsing", "caqtus"]
 classifiers = [
   "Intended Audience :: Developers",
